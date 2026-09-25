@@ -31,10 +31,10 @@
   --color-text-weak: var(--color-neutrals-400);
   --color-surface-highlight: var(--color-yellow-600);
   --color-on-ui-primary-muted: var(--color-neutrals-400);
+
+  /* ==== Spacing ==== */
+  --header-: clamp(1rem, 0.5625rem + 1.75vw, 1.875rem);
+  /* ==== Typography ==== */
+
+  /* ==== Border Radii ==== */
 }
-
-/* ==== Spacing ==== */
-
-/* ==== Typography ==== */
-
-/* ==== Border Radii ==== */
