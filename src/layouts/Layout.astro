@@ -16,9 +16,88 @@ import { Font } from "astro:assets";
       @layer reset, global, tokens, components, overrides;
     </style>
   </head>
+  <header>
+    <h1>Ask<span>Experts</span></h1>
+    <nav>
+      <li><a href="/">Home</a></li>
+      <li><a href="/case-studies/">Case studies</a></li>
+      <li><a href="/team/">Team</a></li>
+      <li><a href="/about/">About</a></li>
+    </nav>
+    <button>Login</button>
+  </header>
   <body>
-    <slot />
-  </body>
-</html>
+    <main>
+      <slot />
+    </main>
+    <section>
+      <h4>Stay UPDATED</h4>
+      <h4>Subscribe Our Newsletter</h4>
+      <h5>
+        Build stronger Customer Relationships with <span>Consultalk </span>
+      </h5>
+      <input type="text" placeholder="your mail adress" />
+      <button class="subscribe"></button>
+    </section>
 
-<style></style>
+    <footer>
+      <h1>Ask<span>Experts</span></h1>
+      <p>©2026 Consultalk. All rights reserved</p>
+      <p>Terms of Service | Privacy Policy</p>
+    </footer>
+  </body>
+
+  <style>
+    h1 {
+      color: var(--color-neutrals-50);
+      font-size: var(--header-);
+    }
+    & h1 span {
+      color: var(--color-yellow-500);
+    }
+    header {
+      background: var(--color-neutrals-900);
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      padding-inline: clamp(1rem, 5vw, 4rem);
+    }
+    & nav {
+      display: inherit;
+      align-items: center;
+      gap: 2rem;
+    }
+    & a {
+      color: var(--color-neutrals-50);
+      font-family: var(--font-lato);
+      text-decoration-line: none;
+    }
+    & button {
+      border-radius: 50px 50px 50px 50px;
+      background-color: var(--color-neutrals-50);
+      justify-self: end;
+    }
+    footer {
+      background: var(--color-neutrals-900);
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+    }
+    & p {
+      color: var(--color-neutrals-400);
+      font-family: var(--font-lato);
+    }
+    section {
+      background: var(--color-neutrals-900);
+    }
+    & h4,
+    h5 {
+      text-align: center;
+      color: var(--color-neutrals-400);
+      font-family: var(--font-lato);
+    }
+    h5 span {
+      color: var(--color-yellow-500);
+    }
+  </style>
+</html>
