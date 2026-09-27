@@ -31,13 +31,13 @@ import { Font } from "astro:assets";
       <slot />
     </main>
     <section>
-      <h4>Stay UPDATED</h4>
-      <h4>Subscribe Our Newsletter</h4>
-      <h5>
+      <h4>STAY UPDATED</h4>
+      <h2>Subscribe Our Newsletter</h2>
+      <p>
         Build stronger Customer Relationships with <span>Consultalk </span>
-      </h5>
+      </p>
       <input type="text" placeholder="your mail adress" />
-      <button class="subscribe"></button>
+      <button>Subscribe</button>
     </section>
 
     <footer>
@@ -48,56 +48,103 @@ import { Font } from "astro:assets";
   </body>
 
   <style>
-    h1 {
-      color: var(--color-neutrals-50);
-      font-size: var(--header-);
-    }
-    & h1 span {
-      color: var(--color-yellow-500);
-    }
     header {
       background: var(--color-neutrals-900);
       display: flex;
       justify-content: space-evenly;
       align-items: center;
       padding-inline: clamp(1rem, 5vw, 4rem);
+      padding-block: 1rem;
+
+      nav {
+        display: inherit;
+        align-items: center;
+        gap: 2rem;
+      }
+
+      a {
+        color: var(--color-neutrals-50);
+        font-family: var(--font-lato);
+        text-decoration-line: none;
+        font-size: 18px;
+      }
     }
-    & nav {
-      display: inherit;
-      align-items: center;
-      gap: 2rem;
-    }
-    & a {
-      color: var(--color-neutrals-50);
+    button {
+      border-radius: 50px;
+      place-self: center;
+      padding-inline: 1rem;
       font-family: var(--font-lato);
-      text-decoration-line: none;
     }
-    & button {
-      border-radius: 50px 50px 50px 50px;
-      background-color: var(--color-neutrals-50);
-      justify-self: end;
+    section {
+      button {
+        background: var(--color-yellow-500);
+        border: 1px solid var(--color-yellow-500);
+        margin-left: 1rem;
+        padding-block: 0.5rem;
+      }
     }
+    header {
+      button {
+        background: var(--color-neutrals-50);
+        border: 1px solid var(--color-neutrals-50);
+      }
+    }
+    header,
+    footer {
+      h1 {
+        font-size: 30px;
+        color: var(--color-neutrals-50);
+        span {
+          color: var(--color-yellow-500);
+        }
+      }
+    }
+
+    section {
+      background: var(--color-neutrals-900);
+      text-align: center;
+      padding-block: 3rem;
+
+      > * + * {
+        margin-top: 1rlh;
+      }
+      input {
+        border-radius: 50px;
+        padding-block: 0.5rem;
+        width: 15%;
+
+        border: 1px solid var(--color-neutrals-50);
+        &::placeholder {
+          color: var(--color-neutrals-700);
+        }
+      }
+
+      h4 {
+        color: var(--color-yellow-500);
+        font-family: var(--font-lato);
+        font-size: 16px;
+      }
+      h2 {
+        color: var(--color-neutrals-50);
+        font-size: 35px;
+      }
+      span {
+        color: var(--color-yellow-500);
+      }
+    }
+
+    p {
+      color: var(--color-neutrals-400);
+      font-family: var(--font-lato);
+    }
+
     footer {
       background: var(--color-neutrals-900);
       display: flex;
       justify-content: space-evenly;
       align-items: center;
-    }
-    & p {
-      color: var(--color-neutrals-400);
-      font-family: var(--font-lato);
-    }
-    section {
-      background: var(--color-neutrals-900);
-    }
-    & h4,
-    h5 {
-      text-align: center;
-      color: var(--color-neutrals-400);
-      font-family: var(--font-lato);
-    }
-    h5 span {
-      color: var(--color-yellow-500);
+      padding-block: 1rem;
+      border-top: 1px solid var(--color-neutrals-700);
     }
   </style>
 </html>
