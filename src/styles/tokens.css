@@ -33,8 +33,9 @@
   --color-on-ui-primary-muted: var(--color-neutrals-400);
 
   /* ==== Spacing ==== */
-  --header-: clamp(1rem, 0.5625rem + 1.75vw, 1.875rem);
-  /* ==== Typography ==== */
 
+  /* ==== Typography ==== */
+  --header-: clamp(1rem, 0.5625rem + 1.75vw, 1.875rem);
+  --header-links: clamp(1rem, 0.9459rem + 0.2163vw, 1.1081rem);
   /* ==== Border Radii ==== */
 }
