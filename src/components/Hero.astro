@@ -1,11 +1,11 @@
 ---
 import { Image } from "astro:assets";
-import checkmark from "@src/icons/checkmark.svg";
 import Services from "./Services.astro";
 import CEOImage from "@assets/images/ceo.webp";
+import MadsImage from "../data/images/mads.webp";
 ---
 
-<section class="hero">
+<section>
   <article class="pattern">
     <div class="hero-content">
       <h1>Empowering Your <br />Business Growth</h1>
@@ -24,7 +24,9 @@ import CEOImage from "@assets/images/ceo.webp";
 <Services />
 
 <section class="work_with_you">
-  <img src="/src/data/images" alt="CEO" />
+  <figure>
+    <Image src={MadsImage} alt="CEO" />
+  </figure>
 
   <h4>WE'LL WORK WITH YOU</h4>
   <h2>What To Expect</h2>
@@ -48,10 +50,10 @@ import CEOImage from "@assets/images/ceo.webp";
 </section>
 
 <style>
-  .hero {
+  section {
     display: grid;
     grid-template-columns: auto auto;
-    padding: -10rem;
+    background-color: var(--color-ui-primary);
 
     article {
       height: 100%;
@@ -95,6 +97,31 @@ import CEOImage from "@assets/images/ceo.webp";
     align-self: start;
     object-fit: cover;
     justify-self: right;
+  }
+
+  figure {
+    margin-inline: auto;
+    max-inline-size: 300px;
+    margin: 3rem 1rem;
+    display: block;
+  }
+
+  figure {
+    position: relative;
+    isolation: isolate;
+    border-radius: 10px;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: -1rem;
+      right: -1rem;
+      width: 100px;
+      height: 100px;
+      background: var(--color-green-400);
+      z-index: -1;
+      border-radius: 10px;
+    }
   }
 
   h1 {
