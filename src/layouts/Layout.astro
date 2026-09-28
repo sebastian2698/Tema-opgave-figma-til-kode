@@ -19,12 +19,24 @@ import { Font } from "astro:assets";
   <header>
     <h1>Ask<span>Experts</span></h1>
     <nav>
-      <li><a href="/">Home</a></li>
-      <li><a href="/case-studies/">Case studies</a></li>
-      <li><a href="/team/">Team</a></li>
-      <li><a href="/about/">About</a></li>
+      <button popovertarget="responsivemenu">Menu</button>
+      <ul popover id="responsivemenu">
+        <li><a href="/">Home</a></li>
+        <li><a href="/case-studies/">Case studies</a></li>
+        <li><a href="/team/">Team</a></li>
+        <li><a href="/about/">About</a></li>
+      </ul>
     </nav>
-    <button>Login</button>
+
+    <button popovertarget="login">Login</button>
+    <ul popover id="login">
+      <h1>Dashboard login</h1>
+      <label for="email">Email adress</label>
+      <input type="text" id="email" name="email" /><br />
+      <label for="password">Password</label>
+      <input type="text" id="password" name="password" /><br />
+      <button>Go to dashboard</button>
+    </ul>
   </header>
   <body>
     <main>
@@ -50,6 +62,7 @@ import { Font } from "astro:assets";
   <style>
     header {
       background: var(--color-neutrals-900);
+      container-type: inline-size;
       display: flex;
       justify-content: space-evenly;
       align-items: center;
@@ -60,21 +73,47 @@ import { Font } from "astro:assets";
         display: inherit;
         align-items: center;
         gap: 2rem;
-      }
 
-      a {
-        color: var(--color-neutrals-50);
-        font-family: var(--font-lato);
-        text-decoration-line: none;
-        font-size: 18px;
+        ul {
+          list-style-type: "";
+          background: var(--color-neutrals-900);
+
+          &:popover-open {
+            position-area: bottom span-left;
+            display: grid;
+            background: var(--color-neutrals-900);
+          }
+
+          @container (width > 600px) {
+            margin: unset;
+            position: unset;
+            display: flex;
+          }
+        }
+
+        button {
+          display: none;
+
+          @container (width <= 600px) {
+            display: block;
+          }
+        }
       }
     }
+    a {
+      color: var(--color-neutrals-50);
+      font-family: var(--font-lato);
+      text-decoration-line: none;
+      font-size: 18px;
+    }
+
     button {
       border-radius: 50px;
       place-self: center;
       padding-inline: 1rem;
       font-family: var(--font-lato);
     }
+
     section {
       button {
         background: var(--color-yellow-500);
@@ -92,7 +131,7 @@ import { Font } from "astro:assets";
     header,
     footer {
       h1 {
-        font-size: 30px;
+        font-size: var(--heading-1);
         color: var(--color-neutrals-50);
         span {
           color: var(--color-yellow-500);
