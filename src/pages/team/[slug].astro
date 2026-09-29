@@ -17,14 +17,28 @@ const { employee } = Astro.props;
 ---
 
 <Layout>
-  <Image
-    src={employee.image.src}
-    alt={employee.image.alt}
-    width={employee.image.width}
-    height={employee.image.height}
-  />
-  <h2>{employee.name}</h2>
-  <p>{employee.description_long}</p>
-  <h3>Past Experience</h3>
-  <p>{employee.past_experience}</p>
+  <section>
+    <Image
+      src={employee.image.src}
+      alt={employee.image.alt}
+      width={employee.image.width}
+      height={employee.image.height}
+    />
+    <article>
+      <h2>{employee.name}</h2>
+      <p>{employee.description_long}</p>
+      <h3>Past Experience</h3>
+      <p>{employee.past_experience}</p>
+    </article>
+  </section>
 </Layout>
+
+<style>
+  section {
+  }
+  img {
+    width: 500px;
+    height: 500px;
+    object-fit: cover;
+  }
+</style>

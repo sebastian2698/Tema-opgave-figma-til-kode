@@ -52,5 +52,6 @@
   --heading-4: clamp(1.25rem, 0.7813rem + 1.875vw, 2.1875rem);
   --heading-5: clamp(0.9375rem, 0.4688rem + 1.875vw, 1.875rem);
   --paragraph-: clamp(0.9375rem, 0.9063rem + 0.125vw, 1rem);
+
   /* ==== Border Radii ==== */
 }
