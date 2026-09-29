@@ -23,9 +23,9 @@ import MadsImage from "../data/images/mads.webp";
 
 <Services />
 
-<section class="work_with_you">
+<section>
   <figure>
-    <Image src={MadsImage} alt="CEO" />
+    <Image src={MadsImage} alt="co-workers talking in a" />
   </figure>
 
   <h4>WE'LL WORK WITH YOU</h4>
@@ -53,10 +53,12 @@ import MadsImage from "../data/images/mads.webp";
   section {
     display: grid;
     grid-template-columns: auto auto;
+
     background-color: var(--color-ui-primary);
 
     article {
       height: 100%;
+      max-width: 75rem;
     }
 
     .pattern {
@@ -104,9 +106,6 @@ import MadsImage from "../data/images/mads.webp";
     max-inline-size: 300px;
     margin: 3rem 1rem;
     display: block;
-  }
-
-  figure {
     position: relative;
     isolation: isolate;
     border-radius: 10px;

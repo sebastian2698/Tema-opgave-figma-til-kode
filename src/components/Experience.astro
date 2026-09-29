@@ -1,9 +1,21 @@
 ---
-
+// import api from //ftk-api.pages.dev//experience
 ---
 
 <section>
-  <article></article>
+  <article>
+
+  <svg viewBox= "0 0 100 100" > <circle cx= "50" cy= "50" r= "50" / > </svg>;
+
+
+
+
+
+
+
+
+
+  </article>
 </section>
 
 <style>
@@ -14,4 +26,75 @@
     display: grid;
     grid-row: 1fr auto;
   }
+
+
+
+
+
+
+    /**********  donot ***********/  
+
+
+
+
+  section {
+  display: grid;
+  place-items: center;
+  article {
+    width: min(100%, 400px);
+  }
+}
+
+
+
+
+article {
+  --value: attr(data-value type(<number>));
+  --value-sting();
+    --value-sting-procent: ();
+  
+  dispay: grid;
+  grid: "stack";
+  place-itaems: center; 
+  
+  
+  
+  &::after {
+    content: var (--value-sting) "%";
+  }
+}
+
+svg {
+  outline: 1px dashed var(--gray-400);
+  rotate: -90deg;
+  overflow: visible;
+}
+.track {
+  --stroke-width: 4px;
+  cx: 50px;
+  cy: 50px;
+  r: calc(50px - var(--stroke-width) / 2);
+
+  fill: none;
+   stroke: red;
+  stroke-width: var(--stroke-width); 
+}
+
+.progress {
+  stroke: #000;
+  stroke-dasharray: 100;
+    stroke-dashoffset:cal  (var(--value));
+    stroke-line-cap: round;
+}
+
+
+.marker {
+  r: 4;
+  stroke: red;
+  offset-path: circle(48px at 50px 50px);
+  offset-disteance: ()
+}
+
+
+
 </style>
