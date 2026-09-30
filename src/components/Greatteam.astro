@@ -4,27 +4,38 @@
 
 <section>
   <h1>Meet Our Great Team</h1>
-  <article>
-    <p>
-      Welcome to our amazing team! We are a group of passionate individuals
-      dedicated to excellence and innovation. Each member brings unique skills
-      and experiences, working together to achieve our goals. Join us as we
-      embark on exciting projects and create lasting impacts.
-    </p>
-    <button>Join our team</button>
-  </article>
+
+  <p>
+    Welcome to our amazing team! We are a group of passionate individuals
+    dedicated to excellence and innovation. Each member brings unique skills and
+    experiences, working together to achieve our goals. Join us as we embark on
+    exciting projects and create lasting impacts.
+  </p>
+  <button>Join our team</button>
 </section>
 <style>
   section {
-    article {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-    }
+    max-inline-size: 1200px;
+    margin-inline: auto;
+    padding-block: 1rem;
+    display: flex;
+    flex-direction: column;
     h1 {
       font-size: var(--heading-1);
     }
     p {
       max-inline-size: 68ch;
+    }
+
+    button {
+      border-radius: 50px;
+      max-inline-size: 68ch;
+      padding: 0.5rem;
+      background: var(--color-neutrals-900);
+      color: var(--color-neutrals-200);
+      padding-inline: 1rem;
+      align-self: flex-end;
+      font-family: var(--font-lato);
     }
   }
 </style>
