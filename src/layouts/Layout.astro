@@ -1,6 +1,7 @@
 ---
 import "@styles/main.css";
 import { Font } from "astro:assets";
+const currentPath = Astro.url.pathname;
 ---
 
 <html lang="en">
@@ -17,20 +18,44 @@ import { Font } from "astro:assets";
     </style>
   </head>
   <header>
-    <h1>Ask<span>Experts</span></h1>
+    <h5>Ask<span>Experts</span></h5>
     <nav>
       <button popovertarget="responsivemenu">Menu</button>
       <ul popover id="responsivemenu">
-        <li><a href="/">Home</a></li>
-        <li><a href="/case-studies/">Case studies</a></li>
-        <li><a href="/team/">Team</a></li>
-        <li><a href="/about/">About</a></li>
+        <li>
+          <a href="/" aria-current={currentPath === "/" ? "page" : undefined}
+            >Home</a
+          >
+        </li>
+        <li>
+          <a
+            href="/case-studies/"
+            aria-current={currentPath.startsWith("/case-studies")
+              ? "page"
+              : undefined}>Case studies</a
+          >
+        </li>
+        <li>
+          <a
+            href="/team/"
+            aria-current={currentPath.startsWith("/team") ? "page" : undefined}
+            >Team</a
+          >
+        </li>
+        <li>
+          <a
+            href="/about/"
+            aria-current={currentPath.startsWith("/about") ? "page" : undefined}
+            >About</a
+          >
+        </li>
       </ul>
     </nav>
 
     <button popovertarget="login">Login</button>
+
     <ul popover id="login">
-      <h1>Dashboard login</h1>
+      <h2>Dashboard Login</h2>
       <label for="email">Email adress</label>
       <input type="text" id="email" name="email" /><br />
       <label for="password">Password</label>
@@ -38,6 +63,7 @@ import { Font } from "astro:assets";
       <button>Go to dashboard</button>
     </ul>
   </header>
+
   <body>
     <main>
       <slot />
@@ -53,7 +79,7 @@ import { Font } from "astro:assets";
     </section>
 
     <footer>
-      <h1>Ask<span>Experts</span></h1>
+      <h5>Ask<span>Experts</span></h5>
       <p>©2026 Consultalk. All rights reserved</p>
       <p>Terms of Service | Privacy Policy</p>
     </footer>
@@ -67,7 +93,6 @@ import { Font } from "astro:assets";
       justify-content: space-evenly;
       align-items: center;
       padding-inline: clamp(1rem, 5vw, 4rem);
-      padding-block: 1rem;
 
       nav {
         display: inherit;
@@ -78,17 +103,18 @@ import { Font } from "astro:assets";
           list-style-type: "";
           background: var(--color-neutrals-900);
 
-          &:popover-open {
-            position-area: bottom span-left;
-            display: grid;
-            background: var(--color-neutrals-900);
+          @container (width <= 600px) {
+            &:popover-open {
+              position-area: bottom span-left;
+              display: grid;
+              background: var(--color-neutrals-900);
+            }
           }
 
           @container (width > 600px) {
-            margin: 0;
-            position: static;
             display: flex;
-            border: none;
+            gap: 2rem;
+            position: static;
           }
         }
 
@@ -101,11 +127,22 @@ import { Font } from "astro:assets";
         }
       }
     }
+
     a {
       color: var(--color-neutrals-50);
       font-family: var(--font-lato);
       text-decoration-line: none;
-      font-size: 18px;
+      font-size: var(--paragraph-);
+    }
+
+    nav {
+      a {
+        &[aria-current="page"]::after {
+          content: "";
+          display: block;
+          border-bottom: 3px solid var(--color-yellow-500);
+        }
+      }
     }
 
     button {
@@ -123,19 +160,69 @@ import { Font } from "astro:assets";
         padding-block: 0.5rem;
       }
     }
+
     header {
       button {
         background: var(--color-neutrals-50);
         border: 1px solid var(--color-neutrals-50);
       }
     }
+
     header,
     footer {
-      h1 {
-        font-size: var(--heading-1);
+      h5 {
+        font-size: clamp(1.0417rem, 0.8452rem + 0.873vw, 1.5rem);
         color: var(--color-neutrals-50);
+
         span {
           color: var(--color-yellow-500);
+        }
+      }
+
+      [popover] {
+        &::backdrop {
+          background: #0003;
+        }
+      }
+      @supports (position-area: bottom span-left) {
+        #login[popover] {
+          inset: auto;
+          margin: 0;
+          margin-top: 1rem;
+          position-area: bottom span-left;
+        }
+      }
+      #login:popover-open {
+        padding-block: 0.5rem;
+        padding: 2rem;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+
+        border-radius: 15px;
+        border: none;
+        background: var(--color-surface-primary);
+        button {
+          background: var(--color-yellow-500);
+          padding-block: 0.5rem;
+          width: 15em;
+          color: var(--color-text);
+          font-family: var(--font-cabin);
+        }
+        h2 {
+          text-align: center;
+          margin-top: -1rem;
+          margin-bottom: 1rlh;
+          font-size: var(--heading-4);
+        }
+        input {
+          border: 1px solid var(--color-neutrals-400);
+        }
+        input,
+        label {
+          border-radius: 50px;
+          padding-block: 0.5rem;
+          width: 15rem;
         }
       }
     }
@@ -145,15 +232,13 @@ import { Font } from "astro:assets";
       text-align: center;
       padding-block: 3rem;
 
-      > * + * {
-        margin-top: 1rlh;
-      }
       input {
         border-radius: 50px;
         padding-block: 0.5rem;
         width: 15%;
 
         border: 1px solid var(--color-neutrals-50);
+
         &::placeholder {
           color: var(--color-neutrals-700);
         }
@@ -164,10 +249,12 @@ import { Font } from "astro:assets";
         font-family: var(--font-lato);
         font-size: 16px;
       }
+
       h2 {
         color: var(--color-neutrals-50);
         font-size: 35px;
       }
+
       span {
         color: var(--color-yellow-500);
       }

@@ -3,6 +3,7 @@
 import { getTeamMembers } from "@lib/api";
 import { Image } from "astro:assets";
 import Layout from "@layouts/Layout.astro";
+import { siInstagram, siFacebook } from "simple-icons";
 
 export async function getStaticPaths() {
   const team = await getTeamMembers();
@@ -17,28 +18,128 @@ const { employee } = Astro.props;
 ---
 
 <Layout>
+  <a href="/team/"><button> ← Back to team </button></a>
   <section>
-    <Image
-      src={employee.image.src}
-      alt={employee.image.alt}
-      width={employee.image.width}
-      height={employee.image.height}
-    />
+    <div class="greenbox">
+      <Image
+        src={employee.image.src}
+        alt={employee.image.alt}
+        width={employee.image.width}
+        height={employee.image.height}
+      />
+      <div class="facebookinstagram">
+        {
+          employee.social_links.map((social: any) => (
+            <a href={social.url}>
+              {social.icon === "instagram" && (
+                <svg viewBox="0 0 24 24">
+                  <path d={siInstagram.path} />
+                </svg>
+              )}
+
+              {social.icon === "facebook" && (
+                <svg viewBox="0 0 24 24">
+                  <path d={siFacebook.path} />
+                </svg>
+              )}
+            </a>
+          ))
+        }
+      </div>
+    </div>
+
     <article>
       <h2>{employee.name}</h2>
+      <p>{employee.title}</p>
       <p>{employee.description_long}</p>
-      <h3>Past Experience</h3>
+      <h4>Past Experience</h4>
       <p>{employee.past_experience}</p>
     </article>
   </section>
-</Layout>
+  <style>
+    section {
+      --flow-space: 0.75rlh;
+    }
 
-<style>
-  section {
-  }
-  img {
-    width: 500px;
-    height: 500px;
-    object-fit: cover;
-  }
-</style>
+    section {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(400px, 100%), 1fr));
+      align-items: center;
+      margin-inline: auto;
+      max-width: 1200px;
+
+      article {
+        margin-top: var(--flow-space, 1rlh);
+        display: grid;
+        grid-template-columns: subgrid;
+        text-box: trim-start cap alphabetic;
+        margin-inline: auto;
+      }
+      article * + * {
+        margin-top: var(--flow-space);
+      }
+
+      img {
+        width: 450px;
+        height: 450px;
+        object-fit: cover;
+        border-radius: 1rem;
+        margin-inline: auto;
+        margin-bottom: var(--flow-space);
+      }
+      .greenbox {
+        position: relative;
+        isolation: isolate;
+
+        &::before {
+          content: "";
+          position: absolute;
+          top: -1rem;
+          left: -1rem;
+          width: 300px;
+          height: 200px;
+          border-radius: 1rem;
+          background: var(--color-ui-secondary);
+          z-index: -1;
+        }
+      }
+      a {
+        text-decoration: none;
+      }
+      h2 {
+        font-size: var(--heading-2);
+      }
+      h4 {
+        font-size: var(--heading-4);
+        font-weight: bold;
+      }
+      p {
+        font-size: var(--paragraph-);
+        color: var(--color-text-muted);
+      }
+
+      svg {
+        width: 30px;
+        height: 30px;
+      }
+
+      .facebookinstagram {
+        display: flex;
+        gap: 1rem;
+        justify-self: center;
+      }
+    }
+    button {
+      border-radius: 50px;
+      display: flex;
+      max-inline-size: 68ch;
+      place-self: end start;
+      padding: 0.5rem;
+      background: var(--color-neutrals-900);
+      color: var(--color-neutrals-200);
+      padding-inline: 1rem;
+
+      font-family: var(--font-lato);
+    }
+  </style>
+</Layout>
