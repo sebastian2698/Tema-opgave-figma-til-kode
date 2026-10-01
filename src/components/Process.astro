@@ -4,8 +4,8 @@ import Phone from "@icons/phone.svg";
 import Pin from "@icons/pin.svg";
 ---
 
-<section>
-  <article>
+<section  >
+  <article class="section-text">
     <h4>Process</h4>
     <h2>Contact Us. It’s Easy.</h2>
     <p>
@@ -31,8 +31,66 @@ import Pin from "@icons/pin.svg";
 
 <style>
   section {
+    display: grid;
+    grid-template-columns:
+      [full-start] minmax(var(--page-padding, 1rem), 1fr)
+      [content-start] minmax(0, calc(var(--content-width, 75rem) / 3))
+      [middle] minmax(0, calc(var(--content-width, 75rem) * 2 / 3))
+      [content-end] minmax(var(--page-padding, 1rem), 1fr)
+      [full-end];
+
+    align-items: center;
+    row-gap: 2.5rem;
+    padding-block: var(--section-space, 5rem);
+
     background-color: var(--color-on-ui-primary);
+    color: #080d18;
   }
+  section > .section-text {
+    grid-column: content-start / middle;
+    min-width: 0;
+    padding-inline-end: 2rem;
+
+    display: grid;
+
+    gap: 1rem;
+  }
+
+  .section-text > * {
+    margin: 0;
+  }
+
+  .section-text > h4 {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .section-text > h2 {
+    max-width: 20ch;
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
+    line-height: 1.2;
+  }
+
+  .section-text > p {
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: var(--color-neutrals-900);
+  }
+
+  section > article {
+    grid-column: middle / content-end;
+    min-width: 0;
+    grid-template-areas: "stack";
+    > * {
+      grid-area: stack;
+    }
+     display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(0.75rem, 2vw, 2rem); */
+  }
+
   article {
     display: grid;
     grid-row: 1fr auto;

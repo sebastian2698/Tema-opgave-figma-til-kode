@@ -5,145 +5,286 @@ import CEOImage from "@assets/images/ceo.webp";
 import MadsImage from "../data/images/mads.webp";
 ---
 
-<section>
-  <article class="pattern">
-    <div class="hero-content">
-      <h1>Empowering Your <br />Business Growth</h1>
+<section class="section-grid hero">
+  <article class="hero-layout">
+    <div class="hero-content pattern">
+      <h1>Empowering Your Business Growth</h1>
+
       <p>
         Discover tailored strategies and expert insights to take your business
         to the next level. Let us help you navigate challenges and achieve
         sustainable success.
       </p>
-      <button><a href="#0">Book a Meeting</a> </button>
-      <button class="ghost"><a href="#0">Learn More</a></button>
+
+      <div class="actions">
+        <a href="#0">Book a Meeting</a>
+        <a class="ghost" href="#0">Learn More →</a>
+      </div>
+    </div>
+
+    <figure>
+      <Image src={CEOImage} alt="CEO" />
+    </figure>
+
+    <div class="hero-services">
+      <Services />
     </div>
   </article>
-  <Image src={CEOImage} alt="CEO" />
 </section>
 
-<Services />
+<section class="section-grid expect">
+  <article>
+    <figure>
+      <Image src={MadsImage} alt="Kollegaer, der arbejder sammen" />
+    </figure>
 
-<section>
-  <figure>
-    <Image src={MadsImage} alt="co-workers talking in a" />
-  </figure>
+    <div class="section-text">
+      <h4>WE'LL WORK WITH YOU</h4>
+      <h2>What To Expect</h2>
+      <p>
+        Our collaboration is built on transparency, efficiency, and measurable
+        results. Together, we create strategies tailored to your unique needs
+        and goals.
+      </p>
 
-  <h4>WE'LL WORK WITH YOU</h4>
-  <h2>What To Expect</h2>
-  <p>
-    Our collaboration is built on transparency, efficiency, and measurable
-    results. Together, we create strategies tailored to your unique needs and
-    goals.
-  </p>
+      <ul>
+        <li>
+          Collaborate to build actionable strategies that drive sustainable
+          growth and deliver tangible outcomes.
+        </li>
 
-  <ul>
-    <li>
-      Collaborate to build actionable strategies that drive sustainable growth
-      and deliver tangible outcomes.
-    </li>
-
-    <li>
-      Identify opportunities to optimize processes and implement impactful
-      solutions with measurable results.
-    </li>
-  </ul>
+        <li>
+          Identify opportunities to optimize processes and implement impactful
+          solutions with measurable results.
+        </li>
+      </ul>
+    </div>
+  </article>
 </section>
 
 <style>
-  section {
-    display: grid;
-    grid-template-columns: auto auto;
-
-    background-color: var(--color-ui-primary);
-
-    article {
-      height: 100%;
-      max-width: 75rem;
-    }
-
-    .pattern {
-      --pattern-color: var(--color-yellow-500);
-      background:
-        radial-gradient(ellipse farthest-side at 65% 35%, #0000, #000),
-        conic-gradient(
-            from 180deg at 1px 1px,
-            alpha(from var(--pattern-color) / 0.35) 75%,
-            #0000 0
-          ) -1px -1px /
-          80px 80px,
-        #000;
-      justify-items: left;
-    }
-  }
-
   /* Styles her */
-  @layer components {
-    .hero {
-      background-color: #f3f4f6;
-      padding: 2rem;
-    }
-  }
-  button {
-    background-color: var(--color-action);
-    color: var(--color-ui-primary);
 
-    .ghost {
-      background-color: var(--color-ui-primary);
-      color: var(--color-on-ui-primary);
-    }
+  /******************** Ovweordnet sektion *******************/
+  .section-grid {
+    display: grid;
+    grid-template-columns:
+      [full-start] minmax(var(--page-padding, 1rem), 1fr)
+      [content-start] minmax(0, var(--content-width, 75rem))
+      [content-end] minmax(var(--page-padding, 1rem), 1fr)
+      [full-end];
+
+    padding-block: var(--section-space, 5rem);
   }
 
-  img {
-    max-width: 800px;
-    height: 600px;
-    align-self: start;
-    object-fit: cover;
-    justify-self: right;
+  .section-grid > article {
+    grid-column: content;
+    min-width: 0;
+    margin: 0;
   }
 
-  figure {
-    margin-inline: auto;
-    max-inline-size: 300px;
-    margin: 3rem 1rem;
+  /************************  hero (tekst og gitter) sektion ************************/
+  .hero {
+    padding-block: 0;
+    margin-bottom: 20px;
+    background-color: var(--color-neutrals-900);
+    color: var(--color-neutrals-50);
+    grid-template-columns:
+      [full-start] minmax(var(--page-padding, 1rem), 1fr)
+      [content-start] minmax(0, calc(var(--content-width, 75rem) / 2))
+      [middle] minmax(0, calc(var(--content-width, 75rem) / 2))
+      [content-end] minmax(var(--page-padding, 1rem), 1fr)
+      [full-end];
+  }
+
+  .hero > article {
+    grid-column: full;
+    display: grid;
+    grid-template-columns: subgrid;
+  }
+
+  .hero > article > .hero-content {
+    grid-column: content-start / middle;
+    grid-row: 1;
+    align-self: stretch;
+    align-content: center;
+    min-width: 0;
+    padding: 4rem 2rem 7rem 0;
+  }
+
+  .hero-content > h1 {
+    max-width: 14ch;
+    margin: 0 0 1rem;
+    font-size: clamp(2rem, 3vw, 3rem);
+    line-height: 1.1;
+    color: var(--color-surface-primary);
+  }
+
+  .hero-content > p {
+    max-width: 45ch;
+    margin: 0 0 1.5rem;
+    line-height: 1.6;
+    color: var(--color-text-muted);
+  }
+
+  .pattern {
+    --pattern-color: var(--color-yellow-500);
+    background:
+      radial-gradient(ellipse farthest-side at 65% 35%, #0000, #000),
+      conic-gradient(
+          from 180deg at 1px 1px,
+          alpha(from var(--pattern-color) / 0.35) 75%,
+          #0000 0
+        ) -1px -1px /
+        80px 80px,
+      #000;
+    justify-items: left;
+  }
+
+  /************* knapper **********/
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .actions > a {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.85rem 1.5rem;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    background: var(--color-action, #ffcc41);
+    color: #080d18;
+    text-decoration: none;
+  }
+
+  .actions > .ghost {
+    border-color: #697080;
+    background: transparent;
+    color: white;
+  }
+
+  .hero > article > figure {
+    grid-column: middle / full-end;
+    grid-row: 1;
+    min-width: 0;
+    margin: 0;
+  }
+
+  .expect > article > figure > :global(img) {
     display: block;
+    width: 100%;
+    aspect-ratio: 1.6;
+    height: auto;
+    object-fit: cover;
+    border-radius: 1rem;
+  }
+
+  .hero > article > .hero-services {
+    grid-column: content-start / content-end;
+    grid-row: 1;
+    align-self: end;
+    min-width: 0;
+    z-index: 1;
+    transform: translateY(50%);
+  }
+  /************************  under hero sektion / "What To Expect" ************************/
+
+  .expect {
+    padding-top: 10rem;
+    background: white;
+    color: #080d18;
+  }
+
+  .expect > article {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: center;
+    gap: var(--content-gap, 3rem);
+  }
+
+  .expect > article > figure {
     position: relative;
     isolation: isolate;
-    border-radius: 10px;
-
-    &::before {
-      content: "";
-      position: absolute;
-      top: -1rem;
-      right: -1rem;
-      width: 100px;
-      height: 100px;
-      background: var(--color-green-400);
-      z-index: -1;
-      border-radius: 10px;
-    }
+    min-width: 0;
+    margin: 0;
   }
 
-  h1 {
-    color: var(--color-surface-primary);
-    font-size: 3rem;
-  }
-
-  ul {
-    display: grid;
-    gap: 1rem;
-    max-width: 45ch;
-  }
-
-  li {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 1rem;
-  }
-
-  li:before {
+  .expect > article > figure::before {
     content: "";
-    width: 1.6rem;
-    height: 1lh;
-    background: "{checkmark}" 50% 50% / 100% auto no-repeat;
+    position: absolute;
+    top: -1.5rem;
+    left: -1rem;
+    width: 30%;
+    height: 40%;
+    border-radius: 1rem;
+    background: var(--color-green-400, #a3eba3);
+    z-index: -1;
+  }
+
+  .expect > article > figure > :global(img) {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 1rem;
+  }
+
+  .section-text {
+    display: grid;
+    gap: 1rem;
+    min-width: 0;
+  }
+
+  .section-text > * {
+    margin: 0;
+  }
+
+  .section-text > h4 {
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .section-text > p,
+  .section-text li {
+    line-height: 1.6;
+  }
+
+  .section-text > ul {
+    display: grid;
+    gap: 1rem;
+    padding-inline-start: 1.25rem;
+  }
+
+  @media (max-width: 48rem) {
+    .hero > article > .hero-content {
+      grid-column: content-start / content-end;
+      padding: 3rem 0;
+    }
+
+    .hero > article > figure {
+      grid-column: content-start / content-end;
+      grid-row: 2;
+    }
+
+    .hero > article > figure > :global(img) {
+      min-height: 0;
+      height: auto;
+    }
+
+    .hero > article > .hero-services {
+      grid-row: 3;
+      padding-block: 2rem;
+      transform: none;
+    }
+
+    .expect {
+      padding-top: 4rem;
+    }
+
+    .expect > article {
+      grid-template-columns: 1fr;
+    }
   }
 </style>

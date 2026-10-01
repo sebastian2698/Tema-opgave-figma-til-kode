@@ -2,99 +2,196 @@
 // import api from //ftk-api.pages.dev//experience
 ---
 
-<section>
-  <article>
+<!-- gul donot chart -->
+<section class="experience-content">
+  <div class="section-text">
+    <!-- <h4>{experience.eyebrow}</h4>
+    <h2>{experience.title}</h2>
+    <p>{experience.subtitle}</p> -->
 
-  <svg viewBox= "0 0 100 100" > <circle cx= "50" cy= "50" r= "50" / > </svg>;
+    <h4>Experience</h4>
+    <h2>More than 25 years of experience</h2>
+    <p>3000+ our clients are insured around the World</p>
+  </div>
 
+  <article class="donut_section">
+    <figure data-value="90">
+      <svg viewBox="0 0 100 100">
+        <circle class="track"></circle>
+        <circle class="progress" pathLength="100"></circle>
+        <circle class="marker"></circle>
+      </svg>
+    </figure>
+    <p>Branching (90%)</p>
 
+    <figure data-value="85">
+      <svg viewBox="0 0 100 100">
+        <circle class="track"></circle>
+        <circle class="progress" pathLength="100"></circle>
+        <circle class="marker"></circle>
+      </svg>
+    </figure>
+    <p>Consistency (85%)</p>
 
-
-
-
-
-
-
+    <figure data-value="95">
+      <svg viewBox="0 0 100 100">
+        <circle class="track"></circle>
+        <circle class="progress" pathLength="100"></circle>
+        <circle class="marker"></circle>
+      </svg>
+    </figure>
+    <p>Improvement (95%)</p>
   </article>
 </section>
-
 <style>
   section {
-    background-color: var(--color-yellow-500);
-  }
-  article {
     display: grid;
-    grid-row: 1fr auto;
+    grid-template-columns:
+      [full-start] minmax(var(--page-padding, 1rem), 1fr)
+      [content-start] minmax(0, calc(var(--content-width, 75rem) / 3))
+      [middle] minmax(0, calc(var(--content-width, 75rem) * 2 / 3))
+      [content-end] minmax(var(--page-padding, 1rem), 1fr)
+      [full-end];
+
+    align-items: center;
+    row-gap: 2.5rem;
+    padding-block: var(--section-space, 5rem);
+
+    background-color: var(--color-yellow-500, #ffcc41);
+    color: #080d18;
+  }
+
+  section > .section-text {
+    grid-column: content-start / middle;
+    min-width: 0;
+    padding-inline-end: 2rem;
+
+    display: grid;
+
+    gap: 1rem;
+  }
+
+  .section-text > * {
+    margin: 0;
+  }
+
+  .section-text > h4 {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .section-text > h2 {
+    max-width: 20ch;
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
+    line-height: 1.2;
+  }
+
+  .section-text > p {
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: var(--color-neutrals-900);
   }
 
 
 
+  /* 
+      article {
+        --value: attr(data-value type(<number>));
+        --value-string: attr(data-value);
+        --value-procent: attr(data-value %);
 
+        container-type: inline-size;
+        display: grid;
+        place-items: center;
+      } */
 
-
-    /**********  donot ***********/  
-
-
-
-
-  section {
-  display: grid;
-  place-items: center;
-  article {
-    width: min(100%, 400px);
+  .donut_section {
+    display: grid;
+    grid-template-columns: subgrid;
+    justify-self: center;
   }
-}
 
+  /***** donut med style *****/
 
-
-
-article {
-  --value: attr(data-value type(<number>));
-  --value-sting();
-    --value-sting-procent: ();
-  
-  dispay: grid;
-  grid: "stack";
-  place-itaems: center; 
-  
-  
-  
-  &::after {
-    content: var (--value-sting) "%";
+  figure {
+    --value: attr(data-value type(<number>));
+    --value-string: attr(data-value);
+    --value-procent: attr(data-value %);
+    container-type: inline-size;
+    display: grid;
+    place-items: center;
   }
-}
 
-svg {
-  outline: 1px dashed var(--gray-400);
-  rotate: -90deg;
-  overflow: visible;
-}
-.track {
-  --stroke-width: 4px;
-  cx: 50px;
-  cy: 50px;
-  r: calc(50px - var(--stroke-width) / 2);
+  svg {
+    outline: 1px dashed var(--gray-400);
+    rotate: -90deg;
+    overflow: visible;
+  }
 
-  fill: none;
-   stroke: red;
-  stroke-width: var(--stroke-width); 
-}
+   figure > svg {
+    grid-column: middle / content-end;
+    min-width: 0;
+    grid-template-areas: "stack";
+    > * {
+      grid-area: stack;
+    }
+     display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(0.75rem, 2vw, 2rem); */
+  }  
 
-.progress {
-  stroke: #000;
-  stroke-dasharray: 100;
-    stroke-dashoffset:cal  (var(--value));
-    stroke-line-cap: round;
-}
+  figure > svg {
+    display: grid;
+    justify-items: center;
+    align-content: start;
+    gap: 1rem;
+    min-width: 0;
+    margin: 0;
+  }
 
+  figure > svg {
+    display: block;
+    width: 100%;
+    max-width: 11rem;
+    height: auto;
+    overflow: visible;
+  }
 
-.marker {
-  r: 4;
-  stroke: red;
-  offset-path: circle(48px at 50px 50px);
-  offset-disteance: ()
-}
+  figure {
+    max-width: 100px;
+    container: circle / inline-size;
 
+    &::after {
+      grid-area: 1 / 1;
+      content: var(--value-string) "%";
+      font-size: 5cqw;
+    }
+  }
+  .track,
+  .progress {
+    --stroke-width: 4px;
+    cx: 50px;
+    cy: 50px;
+    r: calc(50px - var(--stroke-width) / 2);
 
+    fill: none;
+    stroke: gainsboro;
+    stroke-width: var(--stroke-width);
+  }
 
+  .progress {
+    stroke: #000;
+    stroke-dasharray: 100;
+    stroke-dashoffset: calc(100 - var(--value));
+    stroke-linecap: round;
+  }
+
+  .marker {
+    r: 4;
+    stroke: var(--color-surface-primary);
+    offset-path: circle(48px at 50px 50px);
+    offset-distance: var(--value-procent);
+  }
 </style>
