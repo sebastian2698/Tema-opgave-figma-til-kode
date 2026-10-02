@@ -13,7 +13,7 @@ console.log(team);
           <img
             src={employee.image.src}
             alt={employee.image.alt}
-            style={`anchor-name: --${employee.slug}`}
+            style={`anchor-name: --${employee.slug}; view-transition-name: img-${employee.slug}`}
           />
         </a>
         <p class="anchor" style={`position-anchor: --${employee.slug}`}>

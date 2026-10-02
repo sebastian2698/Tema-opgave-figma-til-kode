@@ -184,12 +184,27 @@ const currentPath = Astro.url.pathname;
           background: #0003;
         }
       }
+
       @supports (position-area: bottom span-left) {
         #login[popover] {
           inset: auto;
           margin: 0;
           margin-top: 1rem;
           position-area: bottom span-left;
+          --arrow-size: 0.6rem;
+          position-area: bottom;
+          margin: 0.6rem;
+          border: none;
+
+          &::before {
+            content: "";
+            position: fixed;
+            width: calc(var(--arrow-size) * 1.667);
+            height: var(--arrow-size);
+            background: inherit;
+            clip-path: polygon(0 100%, 50% 0, 100% 100%);
+            position-area: top;
+          }
         }
       }
       #login:popover-open {

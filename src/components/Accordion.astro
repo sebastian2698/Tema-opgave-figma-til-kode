@@ -1,0 +1,42 @@
+---
+const api = await fetch("https://ftk-api.pages.dev/faq");
+const accordion = await api.json();
+---
+
+<p>FAQ</p>
+<h1>Customer Questions</h1>
+{
+  accordion.map((questions: any) => (
+    <details>
+      <summary>{questions.question}</summary>
+      <div>
+        <p>{questions.answer}</p>
+      </div>
+    </details>
+  ))
+}
+
+<style>
+  p,
+  h1 {
+    text-align: center;
+    background: var(--color-on-ui-primary);
+  }
+
+  details {
+    margin-inline: auto;
+    max-inline-size: 60ch;
+    background: var(--color-on-ui-primary);
+  }
+
+  details::details-content {
+    opacity: 0;
+    transition:
+      opacity 600ms,
+      content-visibility 600ms allow-discrete;
+  }
+
+  details[open]::details-content {
+    opacity: 1;
+  }
+</style>
