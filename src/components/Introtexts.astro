@@ -1,0 +1,50 @@
+---
+const { page, title, text } = Astro.props;
+---
+
+<article>
+  <p>{page}</p>
+  <h1>{title}</h1>
+  <p>{text}</p>
+</article>
+
+<style>
+  article {
+    text-align: center;
+    padding-block: 2rem;
+    background: var(--color-neutrals-50);
+
+    > * + * {
+      margin-top: 1rlh;
+    }
+
+    p {
+      color: var(--color-blue-700-transparent);
+      font-size: var(--paragraph-);
+      max-inline-size: 60ch;
+      margin-inline: auto;
+    }
+    h1 {
+      color: var(--color-blue-700);
+      font-size: var(--heading-1);
+      text-decoration: underline var(--color-yellow-500);
+      text-underline-offset: 3px;
+
+      text-box: cap alphabetic;
+      anchor-name: --title-;
+      &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: calc(anchor(--title- right) + 20cap);
+        top: calc(anchor(--title- top) + 1cap);
+        margin-top: 3px;
+        height: 5px;
+        background: var(--color-yellow-500);
+      }
+    }
+    p:nth-of-type(2) {
+      color: var(--color-neutrals-700);
+    }
+  }
+</style>

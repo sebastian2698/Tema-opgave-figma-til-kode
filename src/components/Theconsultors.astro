@@ -1,48 +1,11 @@
 ---
-
+import Introtexts from "./Introtexts.astro";
 ---
 
-<article>
-  <p>Team</p>
-  <h1>The Consultors</h1>
-  <p>
-    Our success stems from the synergy between dedicated teams and our valued
+<Introtexts
+  page="TEAM"
+  title="The Consultors"
+  text="Our success stems from the synergy between dedicated teams and our valued
     clients. We prioritize a company culture that fosters exceptional
-    productivity, ensures customer satisfaction.
-  </p>
-</article>
-
-<style>
-  article {
-    text-align: center;
-    padding-block: 2rem;
-    background: var(--color-neutrals-50);
-    > * + * {
-      margin-top: 1rlh;
-    }
-    max-inline-size: 68ch;
-    margin-inline: auto;
-
-    p {
-      color: var(--color-blue-700-transparent);
-      font-size: var(--paragraph-);
-    }
-    h1 {
-      color: var(--color-blue-700);
-      font-size: var(--heading-1);
-      border-bottom: 2px solid var(--color-yellow-500);
-      position: relative;
-      h1::after {
-        content: "";
-        position: absolute;
-        left: -50px;
-        bottom: -5px;
-        width: 100%;
-        height: 2px;
-      }
-    }
-    p:nth-of-type(2) {
-      color: var(--color-neutrals-700);
-    }
-  }
-</style>
+    productivity, ensures customer satisfaction."
+/>

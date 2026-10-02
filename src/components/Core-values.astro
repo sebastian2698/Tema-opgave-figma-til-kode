@@ -1,0 +1,60 @@
+---
+const core = await fetch("https://ftk-api.pages.dev/core-values");
+const value = await core.json();
+---
+
+<section>
+  <p>{value.eyebrow}</p>
+  <h2>{value.title}</h2>
+  <p>{value.subtitle}</p>
+  <button>{value.button.text}</button>
+</section>
+
+<article>
+  {
+    value.values.map((corevalues: any) => (
+      <div>
+        <svg>{corevalues.icon}</svg>
+        <p>{corevalues.title}</p>
+        <p>{corevalues.description}</p>
+        <p>{corevalues.link.text}</p>
+      </div>
+    ))
+  }
+</article>
+
+<style>
+  section {
+    p {
+      font-size: var(--paragraph-);
+      color: var(--color-text);
+      max-inline-size: 60ch;
+    }
+    h2 {
+      font-size: var(--heading-2);
+      color: var(--color-text);
+    }
+    button {
+      border-radius: 50px;
+      padding: 0.5rem;
+      background: var(--color-neutrals-900);
+      color: var(--color-neutrals-200);
+      padding-inline: 1rem;
+      font-family: var(--font-lato);
+      display: flex;
+      place-self: end;
+    }
+  }
+  article {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto auto 1fr auto;
+
+    div {
+      display: grid;
+      grid-template-rows: subgrid;
+      grid-row: 1 / -1;
+      background: #fff;
+    }
+  }
+</style>
