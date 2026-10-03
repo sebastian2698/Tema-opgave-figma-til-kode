@@ -15,34 +15,40 @@
   </div>
 
   <article class="donut_section">
-    <figure data-value="90">
-      <svg viewBox="0 0 100 100">
-        <circle class="track"></circle>
-        <circle class="progress" pathLength="100"></circle>
-        <circle class="marker"></circle>
-      </svg>
-    </figure>
-    <p>Branching (90%)</p>
+  <figure data-value="85">
+    <svg viewBox="0 0 100 100" aria-hidden="true">
+      <circle class="track"></circle>
+      <circle class="progress" pathLength="100"></circle>
+      <circle class="marker"></circle>
+    </svg>
+    <figcaption>Consistency</figcaption>
+  </figure>
 
-    <figure data-value="85">
-      <svg viewBox="0 0 100 100">
-        <circle class="track"></circle>
-        <circle class="progress" pathLength="100"></circle>
-        <circle class="marker"></circle>
-      </svg>
-    </figure>
-    <p>Consistency (85%)</p>
+  <figure data-value="95">
+    <svg viewBox="0 0 100 100" aria-hidden="true">
+      <circle class="track"></circle>
+      <circle class="progress" pathLength="100"></circle>
+      <circle class="marker"></circle>
+    </svg>
+    <figcaption>Improvement</figcaption>
+  </figure>
 
-    <figure data-value="95">
-      <svg viewBox="0 0 100 100">
-        <circle class="track"></circle>
-        <circle class="progress" pathLength="100"></circle>
-        <circle class="marker"></circle>
-      </svg>
-    </figure>
-    <p>Improvement (95%)</p>
-  </article>
+  <figure data-value="90">
+    <svg viewBox="0 0 100 100" aria-hidden="true">
+      <circle class="track"></circle>
+      <circle class="progress" pathLength="100"></circle>
+      <circle class="marker"></circle>
+    </svg>
+    <figcaption>Branching</figcaption>
+  </figure>
+</article>
 </section>
+
+
+
+
+
+
 <style>
   section {
     display: grid;
@@ -80,6 +86,7 @@
     font-weight: 500;
     letter-spacing: 0.12em;
     text-transform: uppercase;
+    justify-self: left;
   }
 
   .section-text > h2 {
@@ -95,6 +102,104 @@
   }
 
 
+/************** donut graf ************/
+section .donut_section{
+grid-column: middle / content-end;
+min-width: 0;
+display: grid;
+grid-template-columns: repeat(3, minmax(0, 1fr));
+gap: clamp(1rem, 3vw, 3rem);
+
+}
+
+
+.donut_section > {
+  --value: attr(data-value type(<number>));
+  --value-string: attr(data-value);
+  --value-procent: calc(var(--value) * 1%);
+
+  container-type: inline-size;
+  display: grid;
+  grid-template-rows: auto auto;
+  justify-items: center;
+  align-items: center;
+  row-gap: 1rem;
+
+  width: min(100%, 11rem);
+  min-width: 0;
+  margin: 0;
+  justify-self: center;
+
+}
+
+figure > svg {
+  grid-area: 1/1;
+  display: block;
+  width: 100%;
+  height: auto;
+  rotate: -90deg;
+  overflow: visible;
+}
+
+.donut_section > figure::after {
+  grid-area: 1/1;
+  content: var(--value-string) "%";
+  font-size: 25cqw;
+  font-weight: 700;
+  line-height: 1;
+}
+
+figure > figcaption {
+  grid-area: 2 / 1;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+/* Hele ringen — svagt synlig i mellemrummet. */
+.track,
+.progress {
+  cx: 50px;
+  cy: 50px;
+  r: 46px;
+
+  fill: none;
+  stroke-width: 3px;
+}
+
+.track {
+  stroke: rgb(0 0 0 / 12%);
+}
+
+/* Den hvide bue viser procenten. */
+.progress {
+  stroke: white;
+  stroke-dasharray: 100;
+  stroke-dashoffset: calc(100 - var(--value));
+  stroke-linecap: round;
+}
+
+/* Prikken følger procenten rundt på ringen. */
+.marker {
+  r: 3.5px;
+  fill: #080d18;
+  stroke: white;
+  stroke-width: 1.5px;
+
+  offset-path: circle(46px at 50px 50px);
+  offset-distance: var(--value-procent);
+}
+
+@media (max-width: 48rem) {
+  section > .section-text,
+  section > .donut_section {
+    grid-column: content-start / content-end;
+  }
+
+  section > .section-text {
+    padding-inline-end: 0;
+  }
+}
 
   /* 
       article {
@@ -107,15 +212,14 @@
         place-items: center;
       } */
 
-  .donut_section {
+  /* .donut_section {
     display: grid;
     grid-template-columns: subgrid;
     justify-self: center;
-  }
+  } */
 
-  /***** donut med style *****/
 
-  figure {
+  /* figure {
     --value: attr(data-value type(<number>));
     --value-string: attr(data-value);
     --value-procent: attr(data-value %);
@@ -140,7 +244,7 @@
      display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: clamp(0.75rem, 2vw, 2rem); */
-  }  
+   }  
 
   figure > svg {
     display: grid;
@@ -193,5 +297,5 @@
     stroke: var(--color-surface-primary);
     offset-path: circle(48px at 50px 50px);
     offset-distance: var(--value-procent);
-  }
+  } 
 </style>

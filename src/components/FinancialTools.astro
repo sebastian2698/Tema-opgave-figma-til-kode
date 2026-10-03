@@ -15,59 +15,59 @@ import Pin from "@icons/pin.svg";
 import Layout from "@layouts/Layout.astro";
 
 // const projections = await fetch(
-//   "https://ftk-api.pages.dev/financial-projections",
+//  "https://ftk-api.pages.dev/financial-projections",
 // ).then((res) => res.json());
 
-// const projections: Projections = await response.json();
+// const projections: Projections = await Response.json();
 
-type Projection = {
-  icon: string;
-  title: string;
-  description: string;
-  link: { text: string; url: string };
-};
+// type Projection = {
+//   icon: string;
+//   title: string;
+//   description: string;
+//   link: { text: string; url: string };
+// };
 
-type Projections = {
-  title: string;
-  eyebrow: string;
-  subtitle: string;
-  values: Projection[];
-};
----
+// type Projections = {
+//   title: string;
+//   eyebrow: string;
+//   subtitle: string;
+//   values: Projection[];
+// };
+// ---
 
-<!-- <section>
-  <div class="titel-wapper">
-    <h4 class="eyebrow">{projections.eyebrow}</h4>
-    <h2>{projections.title}</h2>
-    <p>{projections.subtitle}</p>
-  </div> --><!-- <figure><ArrowRight /></figure>
-  <figure><ArrowLeft /></figure> --><!-- <article class="scroll-container">
-    <div class="cards">
-      <figure>{projections.icon}</figure>
-      <h3>{projections.title}</h3>
-      <p>{projections.description}</p>
-      <a href="#0">{projections.text} <ArrowRight stroke-width={2.5} /></a>
-       <a> burde måske være en variant af en component --><!-- </section> --><!-- <div
-  class="scroll-container"
-  id="scroller"
-  tabindex="0"
-  role="region"
-  aria-label={projections.title}
->
-  .map() laver ét kort for hvert objekt i API'ets values-array. --><!-- //   projections.values.map((card) => (
-//     <article class="cards">
-//       {/* <svg>{icon}</svg> */}
-//       <path d={iconPaths[card.icon] ?? iconPaths.bars} />
+//  <section>
+//   <div class="titel-wapper">
+//     <h4 class="eyebrow">{projections.eyebrow}</h4>
+//     <h2>{projections.title}</h2>
+//     <p>{projections.subtitle}</p>
+//   </div> -<figure><ArrowRight /></figure>
+//   <figure><ArrowLeft /></figure>  <article class="scroll-container">
+//     <div class="cards">
+//       <figure>{projections.icon}</figure>
+//       <h3>{projections.title}</h3>
+//       <p>{projections.description}</p>
+//       <a href="#0">{projections.text} <ArrowRight stroke-width={2.5} /></a>
+//        <a> burde måske være en variant af en component --></section> </div>
+//   class="scroll-container"
+//   id="scroller"
+//   tabindex="0"
+//   role="region"
+//   aria-label={projections.title}
+// >
+//   .map() laver ét kort for hvert objekt i API'ets values-array. --><!-- //   projections.values.map((card) => (
+// //     <article class="cards">
+// //       {/* <svg>{icon}</svg> */}
+// //       <path d={iconPaths[card.icon] ?? iconPaths.bars} />
 
-//       <h3>{card.title}</h3>
-//       <p>{card.description}</p>
-//       <a href={card.link.url}>
-//         {card.link.text}
-//         <ArrowRight />
-//       </a>
-//     </article>
-//   )) -->//
-<section>
+// //       <h3>{card.title}</h3>
+// //       <p>{card.description}</p>
+// //       <a href={card.link.url}>
+// //         {card.link.text}
+// //         <ArrowRight />
+// //       </a>
+// //     </article>
+// //   )) -->//
+// <section>
 //   <div class="wapper">
 //     <h4>Financial Tools</h4>
 //     <h2>Financial Projections</h2>
@@ -81,15 +81,7 @@ type Projections = {
 //   <figure><ArrowRight /></figure>
 //   <figure><ArrowLeft /></figure>
 
-//   <article class="scroll-container">
-  <div id="scroller">
-//     <div class="cards">
-//       <h3>The Balance Sheet</h3>
-//       <p>
-//         The Balance Sheet is a summary of the assets and liabilities and equity
-//         of a business at a specific point of time.
-//       </p>
-//     </div>
+//   <article class="scroll-container" id="scroller">
 
 //     <div class="cards">
 //       <h3>The Balance Sheet</h3>
@@ -114,6 +106,7 @@ type Projections = {
 //         of a business at a specific point of time.
 //       </p>
 //     </div>
+
 //     <div class="cards">
 //       <h3>The Balance Sheet</h3>
 //       <p>
@@ -128,25 +121,32 @@ type Projections = {
 //         of a business at a specific point of time.
 //       </p>
 //     </div>
-</div>
+//     <div class="cards">
+//       <h3>The Balance Sheet</h3>
+//       <p>
+//         The Balance Sheet is a summary of the assets and liabilities and equity
+//         of a business at a specific point of time.
+//       </p>
+//     </div>
+
 //   </article>
-// </section> 
+// </section>
 
-<script>
-const scroller = document.querySelector("#scroller");
- scroller.addEventListener("command", (e) => {
-if (e.command === "--scroll") {
-       scroller.scrollBy({
-         left: scroller.offsetWidth * e.source.value,      });
-    }
-   });
-</script>
+// <script>
+// const scroller = document.querySelector("#scroller");
+//  scroller.addEventListener("command", (e) => {
+// if (e.command === "--scroll") {
+//        scroller.scrollBy({
+//          left: scroller.offsetWidth * e.source.value,      });
+//     }
+// //    });
+// </script>
 
-<style>
-  .hardcode {
-     display: none;
- }
-  :root {
+// <style>
+//   .hardcode {
+//      display: none;
+//  }
+//   :root {
 //     --content-width: 75rem;
 //     --padding: max(1rem, calc((100% - var(--content-width)) / 2));
 //   }
@@ -233,4 +233,5 @@ if (e.command === "--scroll") {
 //     align-items: center;
 //     justify-items: center;
 //   }
- </style> 
+//  </style>
+---

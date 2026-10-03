@@ -112,7 +112,7 @@ import MadsImage from "../data/images/mads.webp";
     padding: 4rem 2rem 7rem 0;
   }
 
-  .hero-content > h1 {
+  h1 {
     max-width: 14ch;
     margin: 0 0 1rem;
     font-size: clamp(2rem, 3vw, 3rem);
@@ -120,11 +120,25 @@ import MadsImage from "../data/images/mads.webp";
     color: var(--color-surface-primary);
   }
 
-  .hero-content > p {
+  h2 {
+    max-width: 14ch;
+    margin: 0 0 1rem;
+    font-size: clamp(1.5rem, 2vw, 2rem);
+    line-height: 1.1;
+    color: var(--color-neutrals-900);
+  }
+  p {
     max-width: 45ch;
     margin: 0 0 1.5rem;
     line-height: 1.6;
     color: var(--color-text-muted);
+  }
+
+  h4 {
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    justify-self: left;
   }
 
   .pattern {
@@ -238,12 +252,6 @@ import MadsImage from "../data/images/mads.webp";
 
   .section-text > * {
     margin: 0;
-  }
-
-  .section-text > h4 {
-    font-size: 0.75rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
   }
 
   .section-text > p,
