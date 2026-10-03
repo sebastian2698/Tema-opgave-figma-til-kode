@@ -3,40 +3,76 @@ const api = await fetch("https://ftk-api.pages.dev/faq");
 const accordion = await api.json();
 ---
 
-<p>FAQ</p>
-<h1>Customer Questions</h1>
-{
-  accordion.map((questions: any) => (
-    <details>
-      <summary>{questions.question}</summary>
-      <div>
-        <p>{questions.answer}</p>
-      </div>
-    </details>
-  ))
-}
+<main class="faq">
+  <section class="section">
+    <p>FAQ</p>
+    <h1>Customer Questions</h1>
+    {
+      accordion.map((questions: any) => (
+        <details>
+          <summary>{questions.question}</summary>
 
+          <p>{questions.answer}</p>
+        </details>
+      ))
+    }
+  </section>
+</main>
 <style>
-  p,
-  h1 {
-    text-align: center;
+  .faq {
     background: var(--color-on-ui-primary);
-  }
-
-  details {
+    padding: min(7rem, 8%);
+    width: min(95ch, 100% - 5rem);
     margin-inline: auto;
-    max-inline-size: 60ch;
-    background: var(--color-on-ui-primary);
+    border-radius: 1rem;
+
+    summary {
+      display: flex;
+      justify-content: space-between;
+      color: var(--color-text);
+      font-weight: bold;
+      cursor: pointer;
+    }
+    summary::after {
+      content: "+";
+    }
+
+    .section > p {
+      font-size: var(--paragraph-);
+      text-align: center;
+    }
+    .section h1 {
+      font-size: var(--heading-1);
+      text-align: center;
+      margin-top: 1rlh;
+    }
+  }
+  details {
+    padding: 1rem;
+    border-bottom: 3px solid #dadada;
+  }
+  details[open] summary::after {
+    content: "-";
   }
 
-  details::details-content {
-    opacity: 0;
-    transition:
-      opacity 600ms,
-      content-visibility 600ms allow-discrete;
-  }
+  @supports (interpolate-size: allow-keywords) {
+    @media (prefers-reduced-motion: no-preference) {
+      details {
+        interpolate-size: allow-keywords;
+      }
 
-  details[open]::details-content {
-    opacity: 1;
+      details::details-content {
+        block-size: 0;
+        overflow: clip;
+        transition:
+          block-size 0.3s ease,
+          content-visibility 0.3s;
+        transition-behavior: allow-discrete;
+      }
+
+      details:open::details-content {
+        block-size: auto;
+      }
+    }
   }
 </style>

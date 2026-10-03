@@ -1,0 +1,93 @@
+---
+const response = await fetch("https://ftk-api.pages.dev/team");
+const team = await response.json();
+const members = team.slice(0, 2);
+---
+
+<article>
+  <div>
+    <p>OUR TEAM</p>
+    <h2>We champion the bold</h2>
+    <p>
+      Our success stems from the synergy between dedicated teams and our valued
+      clients. We prioritize a company culture that fosters exceptional
+      productivity, ensures customer satisfaction.
+    </p>
+    <a href="/team/"><button>Meet the team</button></a>
+  </div>
+  <section>
+    {
+      members.map((employee: any) => (
+        <div class="employees">
+          <img src={employee.image.src} alt={employee.image.alt} />
+          <div class="employesstext">
+            <h3>{employee.name}</h3>
+            <p>
+              <span>{employee.title}</span>
+            </p>
+            <p>{employee.description}</p>
+          </div>
+        </div>
+      ))
+    }
+  </section>
+</article>
+<style>
+  article {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 5rem;
+    margin: 1rem;
+    text-box: cap alphabetic;
+
+    h2 {
+      font-size: var(--heading-2);
+      padding: 0.5rem;
+      color: var(--color-text);
+      max-inline-size: 10ch;
+    }
+    p {
+      font-size: var(--paragraph-);
+      max-inline-size: 50ch;
+      padding: 0.5rem;
+      color: var(--color-neutrals-700);
+    }
+    h3 {
+      font-size: var(--heading-3);
+    }
+    button {
+      border-radius: 50px;
+      padding: 0.5rem;
+      background: var(--color-neutrals-900);
+      color: var(--color-neutrals-200);
+      padding-inline: 1rem;
+      font-family: var(--font-lato);
+    }
+  }
+  section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+
+    .employees {
+      display: grid;
+      grid-column: 1 / -1;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    .employesstext {
+      padding: 1rem;
+    }
+
+    img {
+      width: 300px;
+      height: 300px;
+      object-fit: cover;
+      border-radius: 1rem;
+    }
+    p span {
+      font-weight: bolder;
+      color: var(--color-text);
+    }
+  }
+</style>
