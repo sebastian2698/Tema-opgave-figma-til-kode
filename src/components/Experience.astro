@@ -14,40 +14,35 @@
     <p>3000+ our clients are insured around the World</p>
   </div>
 
-  <article class="donut_section">
-  <figure data-value="85">
-    <svg viewBox="0 0 100 100" aria-hidden="true">
-      <circle class="track"></circle>
-      <circle class="progress" pathLength="100"></circle>
-      <circle class="marker"></circle>
-    </svg>
-    <figcaption>Consistency</figcaption>
-  </figure>
+  <article class="donut_section scroll-trigger">
+    <figure data-value="85">
+      <svg viewBox="0 0 100 100" aria-hidden="true">
+        <circle class="track"></circle>
+        <circle class="progress" pathLength="100"></circle>
+        <circle class="marker"></circle>
+      </svg>
+      <figcaption>Consistency</figcaption>
+    </figure>
 
-  <figure data-value="95">
-    <svg viewBox="0 0 100 100" aria-hidden="true">
-      <circle class="track"></circle>
-      <circle class="progress" pathLength="100"></circle>
-      <circle class="marker"></circle>
-    </svg>
-    <figcaption>Improvement</figcaption>
-  </figure>
+    <figure data-value="95">
+      <svg viewBox="0 0 100 100" aria-hidden="true">
+        <circle class="track"></circle>
+        <circle class="progress" pathLength="100"></circle>
+        <circle class="marker"></circle>
+      </svg>
+      <figcaption>Improvement</figcaption>
+    </figure>
 
-  <figure data-value="90">
-    <svg viewBox="0 0 100 100" aria-hidden="true">
-      <circle class="track"></circle>
-      <circle class="progress" pathLength="100"></circle>
-      <circle class="marker"></circle>
-    </svg>
-    <figcaption>Branching</figcaption>
-  </figure>
-</article>
+    <figure data-value="90">
+      <svg viewBox="0 0 100 100" aria-hidden="true">
+        <circle class="track"></circle>
+        <circle class="progress" pathLength="100"></circle>
+        <circle class="marker"></circle>
+      </svg>
+      <figcaption>Branching</figcaption>
+    </figure>
+  </article>
 </section>
-
-
-
-
-
 
 <style>
   section {
@@ -65,6 +60,9 @@
 
     background-color: var(--color-yellow-500, #ffcc41);
     color: #080d18;
+
+    view-timeline-name: --experience-scroll;
+    view-timeline-axis: block;
   }
 
   section > .section-text {
@@ -101,178 +99,57 @@
     color: var(--color-neutrals-900);
   }
 
+  /************** donut graf ************/
+  section .donut_section {
+    grid-column: middle / content-end;
+    min-width: 0;
 
-/************** donut graf ************/
-section .donut_section{
-grid-column: middle / content-end;
-min-width: 0;
-display: grid;
-grid-template-columns: repeat(3, minmax(0, 1fr));
-gap: clamp(1rem, 3vw, 3rem);
-
-}
-
-
-.donut_section > {
-  --value: attr(data-value type(<number>));
-  --value-string: attr(data-value);
-  --value-procent: calc(var(--value) * 1%);
-
-  container-type: inline-size;
-  display: grid;
-  grid-template-rows: auto auto;
-  justify-items: center;
-  align-items: center;
-  row-gap: 1rem;
-
-  width: min(100%, 11rem);
-  min-width: 0;
-  margin: 0;
-  justify-self: center;
-
-}
-
-figure > svg {
-  grid-area: 1/1;
-  display: block;
-  width: 100%;
-  height: auto;
-  rotate: -90deg;
-  overflow: visible;
-}
-
-.donut_section > figure::after {
-  grid-area: 1/1;
-  content: var(--value-string) "%";
-  font-size: 25cqw;
-  font-weight: 700;
-  line-height: 1;
-}
-
-figure > figcaption {
-  grid-area: 2 / 1;
-  text-align: center;
-  font-size: 1rem;
-  font-weight: 600;
-}
-
-/* Hele ringen — svagt synlig i mellemrummet. */
-.track,
-.progress {
-  cx: 50px;
-  cy: 50px;
-  r: 46px;
-
-  fill: none;
-  stroke-width: 3px;
-}
-
-.track {
-  stroke: rgb(0 0 0 / 12%);
-}
-
-/* Den hvide bue viser procenten. */
-.progress {
-  stroke: white;
-  stroke-dasharray: 100;
-  stroke-dashoffset: calc(100 - var(--value));
-  stroke-linecap: round;
-}
-
-/* Prikken følger procenten rundt på ringen. */
-.marker {
-  r: 3.5px;
-  fill: #080d18;
-  stroke: white;
-  stroke-width: 1.5px;
-
-  offset-path: circle(46px at 50px 50px);
-  offset-distance: var(--value-procent);
-}
-
-@media (max-width: 48rem) {
-  section > .section-text,
-  section > .donut_section {
-    grid-column: content-start / content-end;
-  }
-
-  section > .section-text {
-    padding-inline-end: 0;
-  }
-}
-
-  /* 
-      article {
-        --value: attr(data-value type(<number>));
-        --value-string: attr(data-value);
-        --value-procent: attr(data-value %);
-
-        container-type: inline-size;
-        display: grid;
-        place-items: center;
-      } */
-
-  /* .donut_section {
     display: grid;
-    grid-template-columns: subgrid;
-    justify-self: center;
-  } */
-
-
-  /* figure {
+    grid-template-columns: repeat(3, 11rem);
+    gap: clamp(1.5rem, 2.5vw, 2.5rem);
+    justify-content: center;
+  }
+  .donut_section > figure {
     --value: attr(data-value type(<number>));
     --value-string: attr(data-value);
-    --value-procent: attr(data-value %);
-    container-type: inline-size;
+
+    container: circle / inline-size;
+
     display: grid;
+    grid-template-rows: auto auto;
     place-items: center;
+    row-gap: 1rem;
+
+    width: min(100%, 11rem);
+    min-width: 0;
+    margin: 0;
+    justify-self: center;
   }
 
-  svg {
-    outline: 1px dashed var(--gray-400);
+  figure > svg {
+    grid-area: 1 / 1;
+    display: block;
+    width: 100%;
+    height: auto;
     rotate: -90deg;
     overflow: visible;
   }
 
-   figure > svg {
-    grid-column: middle / content-end;
-    min-width: 0;
-    grid-template-areas: "stack";
-    > * {
-      grid-area: stack;
-    }
-     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: clamp(0.75rem, 2vw, 2rem); */
-   }  
-
-  figure > svg {
-    display: grid;
-    justify-items: center;
-    align-content: start;
-    gap: 1rem;
-    min-width: 0;
-    margin: 0;
+  .donut_section > figure::after {
+    grid-area: 1 / 1;
+    content: var(--value-string) "%";
+    font-size: 25cqw;
+    font-weight: 700;
+    line-height: 1;
   }
 
-  figure > svg {
-    display: block;
-    width: 100%;
-    max-width: 11rem;
-    height: auto;
-    overflow: visible;
+  figure > figcaption {
+    grid-area: 2 / 1;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 600;
   }
 
-  figure {
-    max-width: 100px;
-    container: circle / inline-size;
-
-    &::after {
-      grid-area: 1 / 1;
-      content: var(--value-string) "%";
-      font-size: 5cqw;
-    }
-  }
   .track,
   .progress {
     --stroke-width: 4px;
@@ -281,21 +158,81 @@ figure > figcaption {
     r: calc(50px - var(--stroke-width) / 2);
 
     fill: none;
-    stroke: gainsboro;
     stroke-width: var(--stroke-width);
   }
 
+  .track {
+    stroke: rgb(0 0 0 / 12%);
+  }
+
   .progress {
-    stroke: #000;
+    stroke: var(--color-neutrals-50);
     stroke-dasharray: 100;
-    stroke-dashoffset: calc(100 - var(--value));
+    stroke-dashoffset: 100;
     stroke-linecap: round;
+
+    animation: draw-donut linear both;
+    animation-timeline: --experience-scroll;
+    animation-range: entry 0% cover 40%;
   }
 
   .marker {
-    r: 4;
-    stroke: var(--color-surface-primary);
-    offset-path: circle(48px at 50px 50px);
-    offset-distance: var(--value-procent);
-  } 
+    r: 3.5px;
+    fill: #080d18;
+    stroke: white;
+    stroke-width: 1.5px;
+
+    offset-path: circle(46px at 50px 50px);
+    offset-distance: 0%;
+
+    animation: move-marker linear both;
+    animation-timeline: --experience-scroll;
+    animation-range: entry 0% cover 40%;
+  }
+
+  @property --animatedNumber {
+    syntax: "<number>";
+    inherits: true;
+    initial-value: 0;
+  }
+
+  @keyframes draw-donut {
+    from {
+      stroke-dashoffset: 100;
+    }
+
+    to {
+      stroke-dashoffset: calc(100 - var(--value));
+    }
+  }
+
+  @keyframes move-marker {
+    from {
+      offset-distance: 0%;
+    }
+
+    to {
+      offset-distance: calc(var(--value) * 1%);
+    }
+  }
+
+  /* .scroll-trigger > figure {
+    --animatedNumber: 0;
+    animation-name: donut-scroll;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+    animation-fill-mode: both;
+
+    animation-timeline: view();
+    animation-range: entry 10% entry 60%;
+  }
+
+  @keyframes donut-scroll {
+    from {
+      --animatedNumber: 0;
+    }
+    to {
+      --animatedNumber: var(--value);
+    }
+  } */
 </style>
