@@ -79,3 +79,91 @@ Hvis I har brugt AI til en væsentlig del af løsningen, så beskriv kort:
 - Hvad lærte I, og hvordan kontrollerede I løsningen?
 
 Hvis I ikke har brugt AI, kan I blot skrive det. I skal ikke indsætte en komplet chatlog.
+
+/********\*\*\********* Doughnut chart ******\*******/
+
+body {
+display: grid;
+place-items: center;
+min-height: 400px;
+&:has(:checked) {
+background: repeating-conic-gradient(#eee 0 25%, #fff 0 50%) 0 / 40px 40px;
+}
+}
+div {
+width: 200px;
+height: 200px;
+}
+
+label {
+visibility: visible;
+}
+
+div {
+border: 10px solid #0000;
+background:
+conic-gradient(#fff) padding-box,
+conic-gradient(red 25%, blue 0) border-box;
+border-radius: 999px;
+@supports (background-clip: border-area) {
+background: conic-gradient(red 25%, blue 0) border-area;
+}
+}
+
+https: //www.joshwcomeau.com/svg/friendly-introduction-to-svg/
+<svg viewBox= "0 0 100 100" > <circle cx= "50" cy= "50" r= "50" / > </svg>;
+
+/****\*\***** ny donot ****\*\*\*****/  
+ /****\*\***** Mangler noget kode for at virker. Er skrevet ned fra undervisningen **\*\*\***/
+
+section {
+display: grid;
+place-items: center;
+article {
+width: min(100%, 400px);
+}
+}
+
+article {
+--value: attr(data-value type(<number>));
+--value-sting();
+--value-sting-procent: ();
+
+dispay: grid;
+grid: "stack";
+place-itaems: center;
+
+&::after {
+content: var (--value-sting) "%";
+}
+}
+
+svg {
+outline: 1px dashed var(--gray-400);
+rotate: -90deg;
+overflow: visible;
+}
+.track {
+--stroke-width: 4px;
+cx: 50px;
+cy: 50px;
+r: calc(50px - var(--stroke-width) / 2);
+
+fill: none;
+stroke: red;
+stroke-width: var(--stroke-width);
+}
+
+.progress {
+stroke: #000;
+stroke-dasharray: 100;
+stroke-dashoffset:cal (var(--value));
+stroke-line-cap: round;
+}
+
+.marker {
+r: 4;
+stroke: red;
+offset-path: circle(48px at 50px 50px);
+offset-disteance: ()
+}
