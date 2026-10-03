@@ -1,6 +1,12 @@
 ---
 const core = await fetch("https://ftk-api.pages.dev/core-values");
 const value = await core.json();
+import ArrowRight from "@icons/arrow--right.svg";
+import Bars from "@icons/bars.svg";
+import Globe from "@icons/globe.svg";
+import Layers from "@icons/layers.svg";
+import Gear from "@icons/gear.svg";
+const icons = [Layers, Bars, Globe, Gear];
 ---
 
 <section>
@@ -8,23 +14,29 @@ const value = await core.json();
   <h2>{value.title}</h2>
   <p>{value.subtitle}</p>
   <button>{value.button.text}</button>
+
+  <article>
+    {
+      value.values.map((corevalues: any, index: number) => {
+        const Icons = icons[index];
+        return (
+          <div>
+            <Icons width={32} height={30} />
+            <p>{corevalues.title}</p>
+            <p>{corevalues.description}</p>
+            <p>
+              {corevalues.link.text} <ArrowRight />
+            </p>
+          </div>
+        );
+      })
+    }
+  </article>
 </section>
-
-<article>
-  {
-    value.values.map((corevalues: any) => (
-      <div>
-        <svg>{corevalues.icon}</svg>
-        <p>{corevalues.title}</p>
-        <p>{corevalues.description}</p>
-        <p>{corevalues.link.text}</p>
-      </div>
-    ))
-  }
-</article>
-
 <style>
   section {
+    padding: min(7rem, 8%);
+    background: var(--color-on-ui-primary);
     p {
       font-size: var(--paragraph-);
       color: var(--color-text);
@@ -54,7 +66,15 @@ const value = await core.json();
       display: grid;
       grid-template-rows: subgrid;
       grid-row: 1 / -1;
+      width: min(20ch, 100% - 3rem);
+
       background: #fff;
+    }
+
+    svg {
+      color: #fff;
+      background: var(--color-ui-primary);
+      border-radius: 50%;
     }
   }
 </style>
