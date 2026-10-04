@@ -1,7 +1,9 @@
 ---
 const response = await fetch("https://ftk-api.pages.dev/team");
 const team = await response.json();
-import { siInstagram, siFacebook } from "simple-icons";
+import Facebook from "@icons/facebook.svg";
+import Instagram from "@icons/instagram.svg";
+
 console.log(team);
 ---
 
@@ -24,21 +26,8 @@ console.log(team);
 
         <p>{employee.description}</p>
         <div class="facebookinstagram">
-          {employee.social_links.map((social: any) => (
-            <a href={social.url}>
-              {social.icon === "instagram" && (
-                <svg viewBox="0 0 24 24">
-                  <path d={siInstagram.path} />
-                </svg>
-              )}
-
-              {social.icon === "facebook" && (
-                <svg viewBox="0 0 24 24">
-                  <path d={siFacebook.path} />
-                </svg>
-              )}
-            </a>
-          ))}
+          <Instagram />
+          <Facebook />
         </div>
       </article>
     ))
@@ -91,8 +80,8 @@ console.log(team);
     }
 
     svg {
-      width: 20px;
-      height: 20px;
+      width: 1lh;
+      height: 1lh;
     }
 
     .facebookinstagram {

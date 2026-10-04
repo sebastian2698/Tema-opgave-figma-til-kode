@@ -3,8 +3,9 @@
 import { getTeamMembers } from "@lib/api";
 import { Image } from "astro:assets";
 import Layout from "@layouts/Layout.astro";
-import { siInstagram, siFacebook } from "simple-icons";
 
+import Facebook from "@icons/facebook.svg";
+import Instagram from "@icons/instagram.svg";
 export async function getStaticPaths() {
   const team = await getTeamMembers();
 
@@ -29,23 +30,8 @@ const { employee } = Astro.props;
         height={employee.image.height}
       />
       <div class="facebookinstagram">
-        {
-          employee.social_links.map((social: any) => (
-            <a href={social.url}>
-              {social.icon === "instagram" && (
-                <svg viewBox="0 0 24 24">
-                  <path d={siInstagram.path} />
-                </svg>
-              )}
-
-              {social.icon === "facebook" && (
-                <svg viewBox="0 0 24 24">
-                  <path d={siFacebook.path} />
-                </svg>
-              )}
-            </a>
-          ))
-        }
+        <Instagram />
+        <Facebook />
       </div>
     </div>
 
@@ -75,7 +61,7 @@ const { employee } = Astro.props;
         margin-inline: auto;
       }
       article * + * {
-        margin-top: var(--flow-space);
+        margin-top: var(--flow-space, 1rlh);
       }
 
       img {
@@ -95,8 +81,8 @@ const { employee } = Astro.props;
           position: absolute;
           top: -1rem;
           left: -1rem;
-          width: 300px;
-          height: 200px;
+          width: 35%;
+          height: 30%;
           border-radius: 1rem;
           background: var(--color-ui-secondary);
           z-index: -1;
@@ -118,8 +104,8 @@ const { employee } = Astro.props;
       }
 
       svg {
-        width: 30px;
-        height: 30px;
+        width: 1lh;
+        height: 1lh;
       }
 
       .facebookinstagram {
@@ -132,7 +118,7 @@ const { employee } = Astro.props;
       border-radius: 50px;
       display: flex;
       max-inline-size: 68ch;
-      place-self: end start;
+      place-self: center start;
       padding: 0.5rem;
       background: var(--color-neutrals-900);
       color: var(--color-neutrals-200);
@@ -141,5 +127,4 @@ const { employee } = Astro.props;
       font-family: var(--font-lato);
     }
   </style>
-</Layout>} />} />
-
+</Layout>
