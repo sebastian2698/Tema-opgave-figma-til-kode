@@ -35,12 +35,14 @@ const icons = [Layers, Bars, Globe, Gear];
 </section>
 <style>
   section {
-    padding: min(7rem, 8%);
+    padding: min(7rem, 10%);
     background: var(--color-on-ui-primary);
+    container-type: inline-size;
     p {
       font-size: var(--paragraph-);
       color: var(--color-text);
-      max-inline-size: 60ch;
+      max-inline-size: 68ch;
+      margin-inline: 0.75em;
     }
     h2 {
       font-size: var(--heading-2);
@@ -55,26 +57,69 @@ const icons = [Layers, Bars, Globe, Gear];
       font-family: var(--font-lato);
       display: flex;
       place-self: end;
+      gap: 0.8rem;
     }
   }
   article {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: auto auto 1fr auto;
+    row-gap: 3rem;
+    gap: 1rem;
+    padding: 1rlh;
 
     div {
       display: grid;
       grid-template-rows: subgrid;
       grid-row: 1 / -1;
-      width: min(20ch, 100% - 3rem);
 
+      box-sizing: border-box;
+      padding: min(10rem, 10%);
+      border: 1px solid var(--color-neutrals-200);
+      border-radius: 1rem;
       background: #fff;
     }
-
+    div:nth-child(2) {
+      margin-bottom: 1rlh;
+    }
+    div:nth-child(4) {
+      margin-bottom: 1rlh;
+    }
+    div > p:first-of-type {
+      font-weight: bold;
+    }
+    div > p:nth-of-type(2) {
+      color: var(--color-text-muted);
+    }
+    div > p:nth-of-type(3) {
+      font-weight: bold;
+    }
     svg {
       color: #fff;
       background: var(--color-ui-primary);
-      border-radius: 50%;
+      box-sizing: content-box;
+      width: 2lh;
+      height: 2lh;
+      border-radius: 50px;
+    }
+    div > p:last-of-type svg {
+      width: 10lh;
+      height: 0.5lh;
+      margin-inline: 2lh;
+      padding-inline: 2lh;
+      background: #fff;
+      color: var(--color-text);
+    }
+  }
+  @container (width < 500px) {
+    article {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto;
+    }
+
+    article > div {
+      grid-template-rows: auto;
+      grid-row: auto;
     }
   }
 </style>

@@ -1,0 +1,123 @@
+---
+import { Image } from "astro:assets";
+import Pexelsivan from "../data/images/pexels-ivan.webp";
+import Checkmark from "@icons/checkmark.svg";
+---
+
+<article>
+  <main>
+    <p>OUR VISION</p>
+    <h2>Turn your ideas into reality.</h2>
+    <p>
+      Capitalize on low hanging fruit to identify a ballpark value added
+      activity beta test. Override the digital divide with additional from
+      DevOps.
+    </p>
+    <p>
+      <Checkmark />
+      Bring to the table win-win survival strategies to ensure proactive domination.
+      At the end of the day.
+    </p>
+
+    <p>
+      <Checkmark />
+      Capitalize on low hanging fruit to identify a ballpark value added activity
+      to beta test override the digital.
+    </p>
+  </main>
+  <figure>
+    <Image src={Pexelsivan} alt="Pexelsivan" />
+  </figure>
+</article>
+
+<section>
+  <div>
+    <h1>1128+</h1>
+    <p>Successful Work</p>
+  </div>
+  <div>
+    <h1>908+</h1>
+    <p>Team member</p>
+  </div>
+  <div>
+    <h1>258+</h1>
+
+    <p>Happy Customers</p>
+  </div>
+  <div>
+    <h1>564+</h1>
+    <p>Creative Idea</p>
+  </div>
+</section>
+<style>
+  section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+
+    h1 {
+      font-size: var(--heading-1);
+    }
+    p {
+      font-size: var(--paragraph-);
+      color: var(--color-text-muted);
+    }
+  }
+  article {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(400px, 100%), 1fr));
+  }
+  section,
+  article {
+    margin: 3.5rlh;
+  }
+
+  figure {
+    position: relative;
+    isolation: isolate;
+  }
+  figure img {
+    display: block;
+    width: min(50ch, calc(100% - 2rem));
+    height: auto;
+    border-radius: 1rem;
+    object-fit: cover;
+    aspect-ratio: 3/2;
+  }
+  figure::before {
+    content: "";
+    position: absolute;
+
+    top: -1.5rem;
+    right: 12rem;
+    width: 15%;
+    height: 30%;
+    border-radius: 1rem;
+    background: var(--color-green-400, #a3eba3);
+    z-index: -1;
+  }
+
+  main > p {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    max-inline-size: 68ch;
+    gap: 1em;
+    margin-bottom: 1rlh;
+    font-size: var(--paragraph-);
+    color: var(--color-text-muted);
+  }
+  main > p > svg {
+    grid-column: 2;
+    color: var(--color-green-600);
+  }
+  main > p > svg {
+    grid-column: 1;
+  }
+  h2 {
+    max-inline-size: 55ch;
+    margin-inline: 0;
+    margin-bottom: 0.5rlh;
+    font-size: var(--heading-2);
+    color: var(--color-text);
+  }
+</style>

@@ -35,6 +35,8 @@ const members = team.slice(0, 2);
 <style>
   article {
     display: grid;
+    container-type: inline-size;
+    container-name: article;
     grid-template-columns: 1fr 1fr;
     padding: 5rem;
     margin: 1rem;
@@ -66,7 +68,9 @@ const members = team.slice(0, 2);
   }
   section {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    container-type: inline-size;
+    container-name: section;
+    grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
     gap: 2rem;
 
     .employees {
@@ -80,14 +84,29 @@ const members = team.slice(0, 2);
     }
 
     img {
-      width: 300px;
-      height: 300px;
+      box-sizing: border-box;
+
+      height: auto;
       object-fit: cover;
       border-radius: 1rem;
     }
     p span {
       font-weight: bolder;
       color: var(--color-text);
+    }
+  }
+
+  @container article (width <= 500px) {
+    section > .employees,
+    .employesstext {
+      grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
+    }
+  }
+
+  @container article (width => 700px) {
+    section > .employees,
+    .employesstext {
+      grid-template-columns: repeat(auto-fit, minmax(min(00px, 100%), 1fr));
     }
   }
 </style>

@@ -109,6 +109,20 @@ const currentPath = Astro.url.pathname;
               position-area: bottom span-left;
               display: grid;
               background: var(--color-neutrals-900);
+
+              transition: 0.3s allow-discrete;
+              translate: 0 -100px;
+              opacity: 0;
+
+              &:popover-open {
+                translate: none;
+                opacity: 1;
+
+                @starting-style {
+                  opacity: 0;
+                  translate: 0 100px;
+                }
+              }
             }
           }
 
@@ -185,7 +199,9 @@ const currentPath = Astro.url.pathname;
           background: #0003;
         }
       }
-
+      [popovertarget] {
+        anchor-name: --button;
+      }
       @supports (position-area: bottom span-left) {
         #login[popover] {
           inset: auto;
@@ -193,18 +209,20 @@ const currentPath = Astro.url.pathname;
           margin-top: 1rem;
           position-area: bottom span-left;
           --arrow-size: 0.6rem;
-          position-area: bottom;
           margin: 0.6rem;
           border: none;
-
+          transition: 0.3s allow-discrete;
+          translate: 0 -100px;
+          opacity: 0;
           &::before {
             content: "";
             position: fixed;
-            width: calc(var(--arrow-size) * 1.667);
+            width: calc(var(--arrow-size) * 1.7);
             height: var(--arrow-size);
             background: inherit;
             clip-path: polygon(0 100%, 50% 0, 100% 100%);
-            position-area: top;
+            position-anchor: --button;
+            position-area: bottom;
           }
         }
       }
@@ -214,10 +232,17 @@ const currentPath = Astro.url.pathname;
         display: flex;
         flex-wrap: wrap;
         flex-direction: column;
-
+        translate: none;
+        opacity: 1;
         border-radius: 15px;
         border: none;
         background: var(--color-surface-primary);
+
+        @starting-style {
+          opacity: 0;
+          translate: 0 100px;
+        }
+
         button {
           background: var(--color-yellow-500);
           padding-block: 0.5rem;
