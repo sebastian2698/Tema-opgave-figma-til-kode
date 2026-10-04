@@ -14,6 +14,13 @@ export default defineConfig({
     domains: ["ftk-api.pages.dev"],
   },
   compressHTML: true,
+
+  vite: {
+    build: {
+      cssMinify: false,
+    },
+  },
+
   experimental: {
     svgOptimizer: svgoOptimizer(),
   },
