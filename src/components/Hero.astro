@@ -3,6 +3,7 @@ import { Image } from "astro:assets";
 import Services from "./Services.astro";
 import CEOImage from "@assets/images/ceo.webp";
 import MadsImage from "../data/images/mads.webp";
+import Checkmark from "@checkmark.svg"
 ---
 
 <section class="section-grid hero">
@@ -244,15 +245,21 @@ import MadsImage from "../data/images/mads.webp";
     border-radius: 1rem;
   }
 
+li:before {
+  content: '';
+  width: 1.6rem;
+  height: 1lh;
+  background: {Checkmark} 50% 50% / 100% auto no-repeat;
+}
+
+
   .section-text {
     display: grid;
     gap: 1rem;
     min-width: 0;
-  }
-
-  .section-text > * {
+ > * {
     margin: 0;
-  }
+  }}
 
   .section-text > p,
   .section-text li {

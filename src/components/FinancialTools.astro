@@ -12,226 +12,222 @@ import Layers from "@icons/layers.svg";
 import Money from "@icons/money.svg";
 import Phone from "@icons/phone.svg";
 import Pin from "@icons/pin.svg";
-import Layout from "@layouts/Layout.astro";
 
-// const projections = await fetch(
-//  "https://ftk-api.pages.dev/financial-projections",
-// ).then((res) => res.json());
+const icons = {
+  bars: Bars,
+  cal: Cal,
+  card: Card,
+  clock: Clock,
+  gear: Gear,
+  globe: Globe,
+  law: Law,
+  layers: Layers,
+  money: Money,
+  phone: Phone,
+  pin: Pin,
+};
 
-// const projections: Projections = await Response.json();
+type CardData = {
+  icon: keyof typeof icons;
+  title: string;
+  description: string;
+  link: {
+    text: string;
+    url: string;
+  };
+};
 
-// type Projection = {
-//   icon: string;
-//   title: string;
-//   description: string;
-//   link: { text: string; url: string };
-// };
+type Projections = {
+  title: string;
+  subtitle: string;
+  eyebrow: string;
+  values: CardData[];
+};
 
-// type Projections = {
-//   title: string;
-//   eyebrow: string;
-//   subtitle: string;
-//   values: Projection[];
-// };
-// ---
-
-//  <section>
-//   <div class="titel-wapper">
-//     <h4 class="eyebrow">{projections.eyebrow}</h4>
-//     <h2>{projections.title}</h2>
-//     <p>{projections.subtitle}</p>
-//   </div> -<figure><ArrowRight /></figure>
-//   <figure><ArrowLeft /></figure>  <article class="scroll-container">
-//     <div class="cards">
-//       <figure>{projections.icon}</figure>
-//       <h3>{projections.title}</h3>
-//       <p>{projections.description}</p>
-//       <a href="#0">{projections.text} <ArrowRight stroke-width={2.5} /></a>
-//        <a> burde måske være en variant af en component --></section> </div>
-//   class="scroll-container"
-//   id="scroller"
-//   tabindex="0"
-//   role="region"
-//   aria-label={projections.title}
-// >
-//   .map() laver ét kort for hvert objekt i API'ets values-array. --><!-- //   projections.values.map((card) => (
-// //     <article class="cards">
-// //       {/* <svg>{icon}</svg> */}
-// //       <path d={iconPaths[card.icon] ?? iconPaths.bars} />
-
-// //       <h3>{card.title}</h3>
-// //       <p>{card.description}</p>
-// //       <a href={card.link.url}>
-// //         {card.link.text}
-// //         <ArrowRight />
-// //       </a>
-// //     </article>
-// //   )) -->//
-// <section>
-//   <div class="wapper">
-//     <h4>Financial Tools</h4>
-//     <h2>Financial Projections</h2>
-//     <p>
-//       Financial projections are essential for planning and monitoring a
-//       company`s performance. They provide insights into potential revenue,
-//       expenses, and profitability over specific periods.
-//     </p>
-//   </div>
-
-//   <figure><ArrowRight /></figure>
-//   <figure><ArrowLeft /></figure>
-
-//   <article class="scroll-container" id="scroller">
-
-//     <div class="cards">
-//       <h3>The Balance Sheet</h3>
-//       <p>
-//         The Balance Sheet is a summary of the assets and liabilities and equity
-//         of a business at a specific point of time.
-//       </p>
-//     </div>
-
-//     <div class="cards">
-//       <h3>The Balance Sheet</h3>
-//       <p>
-//         The Balance Sheet is a summary of the assets and liabilities and equity
-//         of a business at a specific point of time.
-//       </p>
-//     </div>
-
-//     <div class="cards">
-//       <h3>The Balance Sheet</h3>
-//       <p>
-//         The Balance Sheet is a summary of the assets and liabilities and equity
-//         of a business at a specific point of time.
-//       </p>
-//     </div>
-
-//     <div class="cards">
-//       <h3>The Balance Sheet</h3>
-//       <p>
-//         The Balance Sheet is a summary of the assets and liabilities and equity
-//         of a business at a specific point of time.
-//       </p>
-//     </div>
-//     <div class="cards">
-//       <h3>The Balance Sheet</h3>
-//       <p>
-//         The Balance Sheet is a summary of the assets and liabilities and equity
-//         of a business at a specific point of time.
-//       </p>
-//     </div>
-//     <div class="cards">
-//       <h3>The Balance Sheet</h3>
-//       <p>
-//         The Balance Sheet is a summary of the assets and liabilities and equity
-//         of a business at a specific point of time.
-//       </p>
-//     </div>
-
-//   </article>
-// </section>
-
-// <script>
-// const scroller = document.querySelector("#scroller");
-//  scroller.addEventListener("command", (e) => {
-// if (e.command === "--scroll") {
-//        scroller.scrollBy({
-//          left: scroller.offsetWidth * e.source.value,      });
-//     }
-// //    });
-// </script>
-
-// <style>
-//   .hardcode {
-//      display: none;
-//  }
-//   :root {
-//     --content-width: 75rem;
-//     --padding: max(1rem, calc((100% - var(--content-width)) / 2));
-//   }
-//   section {
-//     background: var(--color-on-ui-primary);
-//     display: grid;
-//     grid-template-columns: 1fr minmax(0, 1200px) 1fr;
-//     min-width: 0;
-//     max-width: 100%;
-//     padding-block: 5rem;
-
-//     > * {
-//       grid-column: 2;
-//     }
-
-//     .full {
-//       grid-column: 1 / -1;
-//     }
-//   }
-
-//   .titel-wapper {
-//     display: flex;
-//     justify-content: space-between;
-//     align-items: flex-end;
-//     gap: 2rem;
-//     padding-inline: var(--padding);
-//     margin-bottom: 2rem;
-//   }
-
-//   .scroll-container {
-//     padding-inline: 2rem;
-//     scroll-padding-inline: 2rem;
-//     overflow-inline: auto;
-//     gap: 1rem;
-//     padding-block: 1rem;
-//     display: flex;
-//     scroll-snap-type: inline mandatory;
-
-//     padding-inline: max(1rem, 50% - var(--content-width) / 2);
-//   }
-
-//   .scroller {
-//     padding-inline: max(1rem, 50% - 1200px / 2);
-//   }
-
-//   #scroller {
-//     display: flex;
-//     gap: 1rlh;
-//     padding-inline: max(1rlh, 50% - 600px / 2);
-//     scroll-padding-inline: max(1rlh, 50% - 600px / 2);
-//     > * {
-//       flex: 0 0 min(90%, 400px);
-//       aspect-ratio: 2;
-//       background: oklch(0.88 0.015 none);
-//       border-radius: 30px;
-//       corner-shape: squircle;
-//     }
-//   }
-
-//   #scroller {
-//     scroll-behavior: smooth;
-//     overflow-inline: auto;
-//     scroll-snap-type: x mandatory;
-//     > * {
-//       scroll-snap-align: start;
-//     }
-//   }
-
-//   .cards {
-//     background-color: var(--color-surface-tertiary);
-//     flex: auto;
-//     flex-direction: row;
-//     border-radius: 20px;
-//     width: 379px;
-//     padding: 45px 33px;
-//     align-items: flex-start;
-//     gap: 10px;
-//   }
-
-//   .icon-grid {
-//     display: grid;
-//     grid-template-columns: repeat(4, 1fr);
-//     gap: 20px;
-//     align-items: center;
-//     justify-items: center;
-//   }
-//  </style>
+const projections: Projections = await fetch(
+  "https://ftk-api.pages.dev/financial-projections",
+).then((res) => res.json());
 ---
+
+<section>
+  <div class="section-text">
+    <h4>{projections.eyebrow}</h4>
+    <h2>{projections.title}</h2>
+    <p>{projections.subtitle}</p>
+  </div>
+
+  <article class="scroll-container">
+    <ul role="list" id="scroller">
+      {
+        projections.values.map((card) => {
+          const Icon = icons[card.icon];
+
+          return (
+            <li class="cards">
+              <figure>
+                <Icon />
+              </figure>
+
+              <h3>{card.title}</h3>
+
+              <p>{card.description}</p>
+            </li>
+          );
+        })
+      }
+    </ul>
+  </article>
+</section>
+
+<style>
+  :root {
+    --content-width: 75rem;
+    --padding: max(1rem, calc((100% - var(--content-width)) / 2));
+  }
+
+  section {
+    background: var(--color-on-ui-primary);
+    display: grid;
+    grid-template-columns:
+      [full-start] minmax(var(--page-padding, 1rem), 1fr)
+      [content-start] minmax(0, var(--content-width, 75rem))
+      [content-end] minmax(var(--page-padding, 1rem), 1fr)
+      [full-end];
+    min-width: 0;
+    max-width: 100%;
+    padding-block: 5rem;
+    padding-block: var(--section-space, 5rem);
+
+    .full {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: inherit;
+      row-gap: 3rem;
+    }
+
+    > * {
+      grid-column: content;
+    }
+  }
+
+  section > article {
+    grid-column: content;
+    min-width: 0;
+    margin: 0;
+  }
+  /************************ section-text - intro tekst ****************/
+  .section-text {
+    display: grid;
+    gap: 0.75rem;
+    inline-size: min(100%, 600px);
+    justify-self: start;
+    margin-block-end: 2rem;
+  }
+
+  .section-text > * {
+    margin: 0;
+  }
+
+  .section-text p {
+    max-width: 560px;
+    line-height: 1.6;
+  }
+
+  h2 {
+    max-width: 14ch;
+    margin: 0 0 1rem;
+    font-size: clamp(1.5rem, 2vw, 2rem);
+    line-height: 1.1;
+    color: var(--color-neutrals-900);
+  }
+  p {
+    max-width: 45ch;
+    margin: 0 0 1.5rem;
+    line-height: 1.6;
+    color: var(--color-text-muted);
+  }
+
+  h4 {
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    justify-self: left;
+  }
+
+  /******************* scroll-container ***********/
+  .scroll-container {
+    grid-column: content-start / full-end;
+    min-width: 0;
+    position: relative;
+  }
+
+  .scroll-container > ul {
+    display: flex;
+    gap: 2rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    padding-inline: max(1rem, calc((100% - var(--content-width)) / 2));
+    scroll-padding-inline: max(1rem, calc((100% - var(--content-width)) / 2));
+    padding-block: 1rem;
+    scrollbar-width: none;
+    list-style: none;
+    margin: 0;
+    align-items: stretch;
+  }
+
+  .scroll-container > ul::-webkit-scrollbar {
+    display: none;
+  }
+
+  #scroller {
+    display: flex;
+    gap: 2rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    padding-inline: 0 1rem;
+    scroll-padding-inline: 0 1rem;
+    scrollbar-width: none;
+    list-style: none;
+    margin: 0;
+  }
+
+  /*************** arrow - button *************/
+
+  #scroller::scroll-button(left),
+  #scroller::scroll-button(right) {
+    width: 50px;
+    aspect-ratio: 1;
+    border: 0;
+    border-radius: 50%;
+    background: var(--color-neutrals-900);
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    position: absolute;
+    top: -4.5rem;
+  }
+
+  #scroller::scroll-button(right) {
+    content: "→" / "Næste kort";
+    right: max(1rem, calc((100vw - var(--content-width)) / 2));
+  }
+
+  #scroller::scroll-button(left) {
+    content: "←" / "Forrige kort";
+    right: calc(max(1rem, calc((100vw - var(--content-width)) / 2)) + 66px);
+  }
+  /************* cards ********************/
+
+  .cards {
+    flex: 0 0 min(379px, 85vw);
+    scroll-snap-align: start;
+    background-color: var(--color-surface-tertiary);
+    border-radius: 20px;
+    padding: 45px 20px;
+    display: grid;
+    gap: 10px;
+    align-content: start;
+  }
+</style>

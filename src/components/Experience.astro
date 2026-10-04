@@ -1,46 +1,40 @@
 ---
-// import api from //ftk-api.pages.dev//experience
+type Experience = {
+  title: string;
+  subtitle: string;
+  eyebrow: string;
+  stats: {
+    label: string;
+    value: number;
+  }[];
+};
+
+const experience: Experience = await fetch(
+  "https://ftk-api.pages.dev/experience",
+).then((res) => res.json());
 ---
 
-<!-- gul donot chart -->
 <section class="experience-content">
   <div class="section-text">
-    <!-- <h4>{experience.eyebrow}</h4>
+    <h4>{experience.eyebrow}</h4>
     <h2>{experience.title}</h2>
-    <p>{experience.subtitle}</p> -->
-
-    <h4>Experience</h4>
-    <h2>More than 25 years of experience</h2>
-    <p>3000+ our clients are insured around the World</p>
+    <p>{experience.subtitle}</p>
   </div>
 
   <article class="donut_section scroll-trigger">
-    <figure data-value="85">
-      <svg viewBox="0 0 100 100" aria-hidden="true">
-        <circle class="track"></circle>
-        <circle class="progress" pathLength="100"></circle>
-        <circle class="marker"></circle>
-      </svg>
-      <figcaption>Consistency</figcaption>
-    </figure>
+    {
+      experience.stats.map((stat) => (
+        <figure data-value={stat.value}>
+          <svg viewBox="0 0 100 100" aria-hidden="true">
+            <circle class="track" />
+            <circle class="progress" pathLength="100" />
+            <circle class="marker" />
+          </svg>
 
-    <figure data-value="95">
-      <svg viewBox="0 0 100 100" aria-hidden="true">
-        <circle class="track"></circle>
-        <circle class="progress" pathLength="100"></circle>
-        <circle class="marker"></circle>
-      </svg>
-      <figcaption>Improvement</figcaption>
-    </figure>
-
-    <figure data-value="90">
-      <svg viewBox="0 0 100 100" aria-hidden="true">
-        <circle class="track"></circle>
-        <circle class="progress" pathLength="100"></circle>
-        <circle class="marker"></circle>
-      </svg>
-      <figcaption>Branching</figcaption>
-    </figure>
+          <figcaption>{stat.label}</figcaption>
+        </figure>
+      ))
+    }
   </article>
 </section>
 
@@ -64,7 +58,7 @@
     view-timeline-name: --experience-scroll;
     view-timeline-axis: block;
   }
-
+  /******************** section-text  */
   section > .section-text {
     grid-column: content-start / middle;
     min-width: 0;
@@ -161,6 +155,22 @@
     stroke-width: var(--stroke-width);
   }
 
+  @property --scroll-progress {
+    syntax: "<number>";
+    inherits: true;
+    initial-value: 0;
+  }
+
+  .donut_section > figure {
+    --value: attr(data-value type(<number>));
+    --value-string: attr(data-value);
+    --scroll-progress: 0;
+
+    animation: donut-progress linear both;
+    animation-timeline: --experience-scroll;
+    animation-range: entry 0% cover 40%;
+  }
+
   .track {
     stroke: rgb(0 0 0 / 12%);
   }
@@ -168,12 +178,10 @@
   .progress {
     stroke: var(--color-neutrals-50);
     stroke-dasharray: 100;
-    stroke-dashoffset: 100;
-    stroke-linecap: round;
 
-    animation: draw-donut linear both;
-    animation-timeline: --experience-scroll;
-    animation-range: entry 0% cover 40%;
+    stroke-dashoffset: calc(100 - (var(--value) * var(--scroll-progress)));
+
+    stroke-linecap: round;
   }
 
   .marker {
@@ -182,57 +190,18 @@
     stroke: white;
     stroke-width: 1.5px;
 
-    offset-path: circle(46px at 50px 50px);
-    offset-distance: 0%;
+    offset-path: circle(48px at 50px 50px);
 
-    animation: move-marker linear both;
-    animation-timeline: --experience-scroll;
-    animation-range: entry 0% cover 40%;
+    offset-distance: calc(var(--value) * var(--scroll-progress) * 1%);
   }
 
-  @property --animatedNumber {
-    syntax: "<number>";
-    inherits: true;
-    initial-value: 0;
-  }
-
-  @keyframes draw-donut {
+  @keyframes donut-progress {
     from {
-      stroke-dashoffset: 100;
+      --scroll-progress: 0;
     }
 
     to {
-      stroke-dashoffset: calc(100 - var(--value));
+      --scroll-progress: 1;
     }
   }
-
-  @keyframes move-marker {
-    from {
-      offset-distance: 0%;
-    }
-
-    to {
-      offset-distance: calc(var(--value) * 1%);
-    }
-  }
-
-  /* .scroll-trigger > figure {
-    --animatedNumber: 0;
-    animation-name: donut-scroll;
-    animation-duration: 1s;
-    animation-timing-function: linear;
-    animation-fill-mode: both;
-
-    animation-timeline: view();
-    animation-range: entry 10% entry 60%;
-  }
-
-  @keyframes donut-scroll {
-    from {
-      --animatedNumber: 0;
-    }
-    to {
-      --animatedNumber: var(--value);
-    }
-  } */
 </style>
