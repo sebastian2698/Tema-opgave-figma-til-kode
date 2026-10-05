@@ -10,7 +10,7 @@ Skriv jeres fælles refleksion direkte i denne fil. Erstat hjælpeteksterne med 
 
 ### Mini-guide til Markdown
 
-- `# Titel` er dokumentets hovedoverskrift. Brug kun én.
+- `# Titel` er dokumentets hovfeefefeoverskrift. Brug kun én.
 - `## Afsnit` og `### Underafsnit` giver overskrifter i flere niveauer.
 - `**vigtig tekst**` bliver til **vigtig tekst**.
 - En bindestreg efterfulgt af et mellemrum laver en punktopstilling som denne.
@@ -41,6 +41,8 @@ Reference: [Datahentning i Astro](https://docs.astro.build/en/guides/data-fetchi
 ## Eksempel 1: Skriv navnet på et valgt benspænd
 
 ### Hvor og hvorfor?
+
+Fallback til Doughnut-chart:
 
 Hvor i løsningen bruger I teknikken, og hvilket konkret problem løser den? Henvis gerne til en fil, fx `src/components/MinKomponent.astro`.
 
@@ -80,7 +82,7 @@ Hvis I har brugt AI til en væsentlig del af løsningen, så beskriv kort:
 
 Hvis I ikke har brugt AI, kan I blot skrive det. I skal ikke indsætte en komplet chatlog.
 
-/********\*\*\********* Doughnut chart ******\*******/
+/**\*\*\*\***\*\*\***\*\*\*\*** Doughnut chart **\*\***\***\*\***/
 
 body {
 display: grid;
@@ -113,8 +115,8 @@ background: conic-gradient(red 25%, blue 0) border-area;
 https: //www.joshwcomeau.com/svg/friendly-introduction-to-svg/
 <svg viewBox= "0 0 100 100" > <circle cx= "50" cy= "50" r= "50" / > </svg>;
 
-/****\*\***** ny donot ****\*\*\*****/  
- /****\*\***** Mangler noget kode for at virker. Er skrevet ned fra undervisningen **\*\*\***/
+/\***\*\*\*\*\*** ny donot \***\*\*\*\*\*\***/  
+ /\***\*\*\*\*\*** Mangler noget kode for at virker. Er skrevet ned fra undervisningen **\*\*\***/
 
 section {
 display: grid;
