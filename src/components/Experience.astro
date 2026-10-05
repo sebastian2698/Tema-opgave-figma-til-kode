@@ -176,9 +176,15 @@ const experience: Experience = await fetch(
     --value-string: attr(data-value);
     --scroll-progress: 0;
 
-    animation: donut-progress linear both;
-    animation-timeline: --experience-scroll;
-    animation-range: entry 0% cover 40%;
+    animation: donut-progress 3s both;
+  }
+
+  @supports (animation-timeline: view()) {
+    .donut_section > figure {
+      animation: donut-progress linear both;
+      animation-timeline: --experience-scroll;
+      animation-range: entry 0% cover 40%;
+    }
   }
 
   .track {
