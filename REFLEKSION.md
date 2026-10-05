@@ -1,169 +1,157 @@
 # Refleksion – Figma til kode
 
-**Gruppemedlemmer:** Skriv begge navne her.
+**Gruppemedlemmer:** Julie Høyen & Sebastian Blicher.
 
-## Sådan bruger I filen
+# Refleksion
 
-Skriv jeres fælles refleksion direkte i denne fil. Erstat hjælpeteksterne med jeres egne erfaringer, og slet Markdown-guiden og demoen inden aflevering. Skriv kort og konkret, og brug eksempler fra jeres egen kode.
+## Fallbacks og progressive enhancement
 
-Åbn forhåndsvisningen i VS Code med **Cmd + Shift + V** (Mac) eller **Ctrl + Shift + V** (Windows). Så ser I, hvordan Markdown bliver vist. På GitHub vises formateringen automatisk, når I åbner filen.
+Vi skulle have arbejdet mere med fallbacks og progressive enhancement, da meget af vores CSS er bygget op af relativt mange nye metoder fra undervisningen. Det betyder, at vi har fundet ud af, at ikke alle vores løsninger virker i alle browsere.
 
-### Mini-guide til Markdown
+### Hvorfor passer teknikken til problemet?
 
-- `# Titel` er dokumentets hovedoverskrift. Brug kun én.
-- `## Afsnit` og `### Underafsnit` giver overskrifter i flere niveauer.
-- `**vigtig tekst**` bliver til **vigtig tekst**.
-- En bindestreg efterfulgt af et mellemrum laver en punktopstilling som denne.
-- Skriv kode inde i en sætning mellem enkelte backticks, fx `getTeamMembers()`.
-- Links skrives sådan: `[Astros dokumentation](https://docs.astro.build/)`.
-- Lav et nyt afsnit med en tom linje. Brug også en tom linje før og efter lister og kodeblokke.
+Det har vi valgt, fordi det kan have betydning for brugere, der benytter andre browsere som Firefox eller Safari, da ikke alle koder eller animationer er understøttet af browseren, så de også kan få en lige så god brugeroplevelse som dem, der benytter Chrome.
 
-En kodeblok starter og slutter med tre backticks. Skriv sproget efter de første, fx `js`, `css`, `html` eller `astro`. Se et eksempel i filens kildekode nedenfor.
+### Hvad testede I, og hvad viste testen?
 
-### Kort demo – sådan kan tekst, kode og link kombineres
+Vi forsøgte at bruge fallback til donut-chartet, hvor animationerne understøttes på Chrome version 155.0.8059.26, men ikke Firefox 157.0.
 
-> Dette er et opdigtet eksempel på formen, ikke en færdig refleksion eller et ekstra krav.
+For at løse problemet brugte vi en kombination af Developer Tools og AI til at finde frem til, hvilke koder der ikke understøttes. Her fandt vi frem til, at koden `animation-timeline` ikke er kompatibel med Firefox.
 
-Vi flyttede datahentningen til en fælles funktion, så endpointet kun skal vedligeholdes ét sted.
+Eksempel fra `/src/components/Experience.astro`=
 
-```js
-export function getServices() {
-  return apiFetch("https://ftk-api.pages.dev/services");
-}
+```CSS
+.donut_section > figure {
+--value: attr(data-value type(<number>));
+ --value-string: attr(data-value);
+--scroll-progress: 0;
+animation: donut-progress 3s both;
+  }
+
+@supports (animation-timeline: view()) {
+    .donut_section > figure {
+      animation: donut-progress linear both;
+      animation-timeline: --experience-scroll;
+      animation-range: entry 0% cover 40%;
+    }
+  }
 ```
 
-I komponenten kalder vi `getServices()`. Vi kontrollerede, at de samme servicetitler blev vist før og efter ændringen. Næste skridt er at undersøge, hvad der sker, hvis API'et returnerer en fejl.
+Vi sparrede derefter med AI om, at vi kunne bruge `animation`, som virker i ældre browsere, og sige, at koden skal have `donut-progress 3s both`, hvilket vil sige, at animationen skal køre i 3 sekunder på begge elementer.
 
-Reference: [Datahentning i Astro](https://docs.astro.build/en/guides/data-fetching/).
+Derefter lavede vi en fallback omkring dette, hvilket godt kunne få cirklen til at køre rundt, men vi mangler stadig en helt konkret fallback-løsning til resten af animationerne.
+
+### Hvad ændrede I, eller hvad mangler stadig?
+
+Vi skal undersøge, hvorvidt det er muligt at lave en helt konkret fallback-løsning, som også gør det muligt at se stregerne følge med cirklen, så brugerne kan få en tilsvarende oplevelse som Chrome brugerere.
+
+Ved at teste med fallback har vi også lært, at selvom nyere funktioner ikke er understøttet i alle browsere, behøver vi ikke kun at tilpasse vores kode med ældre metoder. Vi har også mulighed for at splitte funktionaliteten op og tilpasse de enkelte dele, så vi kan løse problemerne for flere brugere.
 
 ---
 
-## Eksempel 1: Skriv navnet på et valgt benspænd
+## Global og lokal CSS
 
-### Hvor og hvorfor?
+Vi havde en forventning om, at vi ville starte med at lave en global CSS, som kunne definere bredden på siden og opsætte grids, fontstørrelser og gøre fontstørrelserne responsive.
 
-Hvor i løsningen bruger I teknikken, og hvilket konkret problem løser den? Henvis gerne til en fil, fx `src/components/MinKomponent.astro`.
+Dermed havde vi også et ønske om at lave en overordnet regel for `.section-text`, som kunne ligge i den globale CSS. På den måde kunne vi undgå at skulle bruge scoped styling i samtlige Astro-komponenter, hvor den bliver brugt.
 
-### Relevant kode
+Det viste sig dog, at der opstod problemer med globale og lokale CSS-regler, der overlappede hinanden. Det gjorde det sværere at styre, hvilke regler der skulle gælde i de enkelte komponenter. Derfor endte vi med at bruge scoped styling i stedet.
 
-Indsæt en kort kodeblok fra jeres løsning. Vælg det passende sprog, og forklar den del, der er vigtig for jeres valg.
+---
 
-### Afprøvning og ændringer
+## Data fra API’et
 
-- **Vi testede:** Beskriv situationen, fx en smal skærm, lang tekst eller tastaturbetjening.
-- **Vi observerede:** Hvad skete der konkret?
-- **Vi ændrede eller mangler:** Hvad rettede I, eller hvad vil være næste skridt?
+API’et har drillet en del for Julie, da hun ikke har arbejdet så meget med det før. Da hun først fandt ud af, hvordan det fungerede, var det dog forholdsvis nemt at tilføje data til de komponenter, der skulle gøre brug af API’et.
 
-## Eksempel 2: Skriv navnet på et valgt benspænd
+Donut-chartet har dog drillet en del, da det både skulle hente værdien fra API’et og vise den inde i cirklen. Samtidig skulle værdien afspejles i procent rundt langs kanten af chartet. Derudover skulle en SVG-animation følge den hvide streg rundt i kanten, i takt med at man scroller ned på siden.
 
-Brug samme struktur som i eksempel 1: Hvor og hvorfor? Relevant kode. Afprøvning og ændringer.
+---
 
-## Eksempel 3: Skriv navnet på et valgt benspænd
+## Responsivt design
 
-Brug samme struktur som i eksempel 1: Hvor og hvorfor? Relevant kode. Afprøvning og ændringer.
+Det havde også været en fordel at arbejde med det responsive design tidligere i processen, blandt andet ved hjælp af container queries. På den måde var mobilversionen ikke blevet en eftertanke, men havde været en del af udviklingen fra starten.
 
-## Fallback og robusthed
+---
 
-Dette må gerne indgå i de tre eksempler ovenfor. Hvis det allerede er dækket dér, kan I slette dette afsnit.
+## Mange ændringer samtidig
 
-- **Fallback/progressive enhancement:** Beskriv mindst ét konkret eksempel. Hvad oplever brugeren med og uden understøttelse? Link til dokumentation for den valgte feature, og angiv de browsere og versioner, I har testet.
-- **Defensive CSS:** Vis et konkret eksempel på, hvordan løsningen håndterer fx lang tekst eller lidt plads.
-- **Global CSS og komponent-CSS:** Forklar kort, hvad I har placeret hvor, og hvorfor.
+Det havde nok også været en fordel at teste færre ting ad gangen, når der blev lavet rettelser. Når mange ting bliver ændret samtidig, kan det være svært at finde ud af, hvilken ændring der har skabt en fejl.
 
-## Brug af AI
+Næste gang vil det være en fordel at man ikke lavde for mange ændringer af ad gangen og teste løbende, så det bliver nemmere at fejlfinde og bevare overblikket.
 
-Hvis I har brugt AI til en væsentlig del af løsningen, så beskriv kort:
+---
 
-- Hvad brugte I den til?
-- Hvad ændrede eller fravalgte I i svaret?
-- Hvad lærte I, og hvordan kontrollerede I løsningen?
+## Ekstra detalje
 
-Hvis I ikke har brugt AI, kan I blot skrive det. I skal ikke indsætte en komplet chatlog.
+Som lidt ekstra lir har vi lavet et favicon, som er en sammensætning af de to forbogstaver, som er i logoet (AE). Vi har sat dem sammen med de hvide og gule farver og samme skrifttype som logoet, så det giver et mere overordnet professionelt syn på siden. Også selvom det ikke var en del af opgaven.
 
-/********\*\*\********* Doughnut chart ******\*******/
+---
 
-body {
-display: grid;
-place-items: center;
-min-height: 400px;
-&:has(:checked) {
-background: repeating-conic-gradient(#eee 0 25%, #fff 0 50%) 0 / 40px 40px;
+# Benspænd
+
+## Classes og nesting
+
+Vi har villet bruge så få classes som muligt og arbejde mere med nesting. Hvis vi havde mere tid, ville vi have gennemgået hele vores opgave og set, om vi kunne ændre classes til nesting.
+
+## API frem for hardcode
+
+Vi har også arbejdet med at få tekst og billeder fra API'er frem for at hardcode dem. Dog har det været at hardcode for at lave HTML-strukturen og style på det først.
+
+## Subgrid
+
+Sebastian havde et ønske om at have benyttet subgrid lidt mere i koden frem for at have forskellige grids i classes. Det har skyldtes, at jeg enten ikke kunne få det til at virke, eller også har jeg bedømt ud fra Figma-designet, at det ikke gav mening at benytte subgrids.
+
+Der er blandt andet blevet brugt subgrid for at få hero-billedet til at være inde i hero-artiklen og have `.hero-content`-teksten på venstre side.
+
+Eksempel fra `src/components/Hero.astro` =
+
+```CSS
+.hero > article {
+  grid-column: full;
+  display: grid;
+  grid-template-columns: subgrid;
 }
-}
-div {
-width: 200px;
-height: 200px;
-}
+```
 
-label {
-visibility: visible;
-}
+---
 
-div {
-border: 10px solid #0000;
-background:
-conic-gradient(#fff) padding-box,
-conic-gradient(red 25%, blue 0) border-box;
-border-radius: 999px;
-@supports (background-clip: border-area) {
-background: conic-gradient(red 25%, blue 0) border-area;
-}
-}
+# Tekniske krav
 
-https: //www.joshwcomeau.com/svg/friendly-introduction-to-svg/
-<svg viewBox= "0 0 100 100" > <circle cx= "50" cy= "50" r= "50" / > </svg>;
+## `tokens.css`
 
-/****\*\***** ny donot ****\*\*\*****/  
- /****\*\***** Mangler noget kode for at virker. Er skrevet ned fra undervisningen **\*\*\***/
+Vi har også arbejdet mere med `tokens.css`, som giver en mere generel strømlining igennem hele siden. Fx får websiden den samme padding, som giver den samme bredde på alle sider.
 
-section {
-display: grid;
-place-items: center;
-article {
-width: min(100%, 400px);
-}
-}
+---
 
-article {
---value: attr(data-value type(<number>));
---value-sting();
---value-sting-procent: ();
+## Container query
 
-dispay: grid;
-grid: "stack";
-place-itaems: center;
+Vi har arbejdet med container query i donut-chartet, så de ændrer sig fra at være i `grid-template-columns` til flex, når containeren bliver maks. 700px bred.
 
-&::after {
-content: var (--value-sting) "%";
-}
+Eksempel fra `/src/components/Experience.astro`=
+
+```CSS
+section .donut_section {
+  grid-column: middle / content-end;
+  min-width: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 11rem);
+  gap: clamp(1.5rem, 2.5vw, 2.5rem);
+  justify-content: center;
 }
 
-svg {
-outline: 1px dashed var(--gray-400);
-rotate: -90deg;
-overflow: visible;
-}
-.track {
---stroke-width: 4px;
-cx: 50px;
-cy: 50px;
-r: calc(50px - var(--stroke-width) / 2);
+@container experience (max-width: 700px) {
+  section > .section-text {
+    grid-column: content-start / content-end;
+    padding-inline-end: 0;
+  }
 
-fill: none;
-stroke: red;
-stroke-width: var(--stroke-width);
+  section .donut_section {
+    grid-column: content-start / content-end;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 }
+```
 
-.progress {
-stroke: #000;
-stroke-dasharray: 100;
-stroke-dashoffset:cal (var(--value));
-stroke-line-cap: round;
-}
-
-.marker {
-r: 4;
-stroke: red;
-offset-path: circle(48px at 50px 50px);
-offset-disteance: ()
-}
+---
