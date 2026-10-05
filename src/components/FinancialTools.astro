@@ -57,6 +57,11 @@ const projections: Projections = await fetch(
   </div>
 
   <article class="scroll-container">
+    <div class="progressenhancement">
+      <button>Hej</button>
+      <button>Dig</button>
+    </div>
+
     <ul role="list" id="scroller">
       {
         projections.values.map((card) => {
@@ -195,28 +200,47 @@ const projections: Projections = await fetch(
 
   /*************** arrow - button *************/
 
-  #scroller::scroll-button(left),
-  #scroller::scroll-button(right) {
-    width: 50px;
-    aspect-ratio: 1;
-    border: 0;
-    border-radius: 50%;
-    background: var(--color-neutrals-900);
-    color: white;
-    font-size: 1.5rem;
-    cursor: pointer;
-    position: absolute;
-    top: -4.5rem;
+  .progressenhancement button {
+    display: flex;
+    gap: 2rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    padding-inline: 0 1rem;
+    scroll-padding-inline: 0 1rem;
+    scrollbar-width: none;
+    list-style: none;
+    margin: 0;
   }
 
-  #scroller::scroll-button(right) {
-    content: "→" / "Næste kort";
-    right: max(1rem, calc((100vw - var(--content-width)) / 2));
-  }
+  @supports selector(ul::-webkit-scrollbar) {
+    .progressenhancement {
+      display: none;
+    }
 
-  #scroller::scroll-button(left) {
-    content: "←" / "Forrige kort";
-    right: calc(max(1rem, calc((100vw - var(--content-width)) / 2)) + 66px);
+    #scroller::scroll-button(left),
+    #scroller::scroll-button(right) {
+      width: 50px;
+      aspect-ratio: 1;
+      border: 0;
+      border-radius: 50%;
+      background: var(--color-neutrals-900);
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+      position: absolute;
+      top: -4.5rem;
+    }
+
+    #scroller::scroll-button(right) {
+      content: "→" / "Næste kort";
+      right: max(1rem, calc((100vw - var(--content-width)) / 2));
+    }
+
+    #scroller::scroll-button(left) {
+      content: "←" / "Forrige kort";
+      right: calc(max(1rem, calc((100vw - var(--content-width)) / 2)) + 66px);
+    }
   }
   /************* cards ********************/
 
