@@ -1,6 +1,7 @@
 ---
 import "@styles/main.css";
 import { Font } from "astro:assets";
+const currentPath = Astro.url.pathname;
 ---
 
 <html lang="en">
@@ -17,67 +18,292 @@ import { Font } from "astro:assets";
     </style>
   </head>
   <header>
-    <h1>Ask<span>Experts</span></h1>
+    <h5>Ask<span>Experts</span></h5>
     <nav>
-      <li><a href="/">Home</a></li>
-      <li><a href="/case-studies/">Case studies</a></li>
-      <li><a href="/team/">Team</a></li>
-      <li><a href="/about/">About</a></li>
+      <button popovertarget="responsivemenu">Menu</button>
+      <ul popover id="responsivemenu">
+        <li>
+          <a href="/" aria-current={currentPath === "/" ? "page" : undefined}
+            >Home</a
+          >
+        </li>
+        <li>
+          <a
+            href="/case-studies/"
+            aria-current={currentPath.startsWith("/case-studies")
+              ? "page"
+              : undefined}>Case studies</a
+          >
+        </li>
+        <li>
+          <a
+            href="/team/"
+            aria-current={currentPath.startsWith("/team") ? "page" : undefined}
+            >Team</a
+          >
+        </li>
+        <li>
+          <a
+            href="/about/"
+            aria-current={currentPath.startsWith("/about") ? "page" : undefined}
+            >About</a
+          >
+        </li>
+      </ul>
     </nav>
-    <button>Login</button>
+
+    <button popovertarget="login">Login</button>
+
+    <ul popover id="login">
+      <h2>Dashboard Login</h2>
+      <label for="email">Email adress</label>
+      <input type="text" id="email" name="email" /><br />
+      <label for="password">Password</label>
+      <input type="text" id="password" name="password" /><br />
+      <button>Go to dashboard</button>
+    </ul>
   </header>
+
   <body>
     <main>
       <slot />
     </main>
     <section>
-      <h4>Stay UPDATED</h4>
-      <h4>Subscribe Our Newsletter</h4>
-      <h5>
+      <h4>STAY UPDATED</h4>
+      <h2>Subscribe Our Newsletter</h2>
+      <p>
         Build stronger Customer Relationships with <span>Consultalk </span>
-      </h5>
+      </p>
       <input type="text" placeholder="your mail adress" />
-      <button class="subscribe"></button>
+      <button>Subscribe</button>
     </section>
 
     <footer>
-      <h1>Ask<span>Experts</span></h1>
+      <h5>Ask<span>Experts</span></h5>
       <p>©2026 Consultalk. All rights reserved</p>
       <p>Terms of Service | Privacy Policy</p>
     </footer>
   </body>
 
   <style>
-    h1 {
-      color: var(--color-neutrals-50);
-      font-size: var(--header-);
-    }
-    & h1 span {
-      color: var(--color-yellow-500);
-    }
     header {
       background: var(--color-neutrals-900);
+      container-type: inline-size;
       display: flex;
       justify-content: space-evenly;
       align-items: center;
       padding-inline: clamp(1rem, 5vw, 4rem);
+      position: sticky;
+
+      nav {
+        display: inherit;
+        align-items: center;
+        gap: 2rem;
+
+        ul {
+          list-style-type: "";
+          background: var(--color-neutrals-900);
+
+          @container (width <= 600px) {
+            &:popover-open {
+              position-area: bottom span-left;
+              display: grid;
+              background: var(--color-neutrals-900);
+
+              transition: 0.3s allow-discrete;
+              translate: 0 -100px;
+              opacity: 0;
+
+              &:popover-open {
+                translate: none;
+                opacity: 1;
+
+                @starting-style {
+                  opacity: 0;
+                  translate: 0 100px;
+                }
+              }
+            }
+          }
+
+          @container (width > 600px) {
+            display: flex;
+            gap: 2rem;
+            position: static;
+          }
+        }
+
+        button {
+          display: none;
+
+          @container (width <= 600px) {
+            display: block;
+          }
+        }
+      }
     }
-    & nav {
-      display: inherit;
-      align-items: center;
-      gap: 2rem;
-    }
-    & a {
+
+    a {
+      color: var(--color-neutrals-50);
       font-family: var(--font-lato);
       text-decoration-line: none;
+      font-size: var(--paragraph-);
     }
-    & button {
-      border-radius: 50px 50px 50px 50px;
-      background-color: var(--color-neutrals-50);
-      justify-self: end;
+
+    nav {
+      a {
+        &[aria-current="page"]::after {
+          content: "";
+          display: block;
+          border-bottom: 3px solid var(--color-yellow-500);
+        }
+      }
     }
-    li > a {
-      color: var(--color-neutrals-50);
+
+    button {
+      border-radius: 50px;
+      place-self: center;
+      padding-inline: 1rem;
+      font-family: var(--font-lato);
+    }
+
+    section {
+      button {
+        background: var(--color-yellow-500);
+        border: 1px solid var(--color-yellow-500);
+        margin-left: 1rem;
+        padding-block: 0.5rem;
+      }
+    }
+
+    header {
+      button {
+        background: var(--color-neutrals-50);
+        border: 1px solid var(--color-neutrals-50);
+      }
+    }
+
+    header,
+    footer {
+      h5 {
+        font-size: clamp(1.0417rem, 0.8452rem + 0.873vw, 1.5rem);
+        color: var(--color-neutrals-50);
+
+        span {
+          color: var(--color-yellow-500);
+        }
+      }
+
+      [popover] {
+        &::backdrop {
+          background: #0003;
+        }
+      }
+      [popovertarget] {
+        anchor-name: --button;
+      }
+      @supports (position-area: bottom span-left) {
+        #login[popover] {
+          inset: auto;
+          margin: 0;
+          margin-top: 1rem;
+          position-area: bottom span-left;
+          --arrow-size: 0.6rem;
+          margin: 0.6rem;
+          border: none;
+          transition: 0.3s allow-discrete;
+          translate: 0 -100px;
+          opacity: 0;
+          &::before {
+            content: "";
+            position: fixed;
+            width: calc(var(--arrow-size) * 1.7);
+            height: var(--arrow-size);
+            background: inherit;
+            clip-path: polygon(0 100%, 50% 0, 100% 100%);
+            position-anchor: --button;
+            position-area: bottom;
+          }
+        }
+      }
+      #login:popover-open {
+        padding-block: 0.5rem;
+        padding: 2rem;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+        translate: none;
+        opacity: 1;
+        border-radius: 15px;
+        border: none;
+        background: var(--color-surface-primary);
+
+        @starting-style {
+          opacity: 0;
+          translate: 0 100px;
+        }
+
+        button {
+          background: var(--color-yellow-500);
+          padding-block: 0.5rem;
+          width: 15em;
+          color: var(--color-text);
+          font-family: var(--font-cabin);
+        }
+        h2 {
+          text-align: center;
+          margin-top: -1rem;
+          margin-bottom: 1rlh;
+          font-size: var(--heading-4);
+        }
+        input {
+          border: 1px solid var(--color-neutrals-400);
+        }
+        input,
+        label {
+          border-radius: 50px;
+          padding-block: 0.5rem;
+          width: 15rem;
+        }
+      }
+    }
+
+    section {
+      background: var(--color-neutrals-900);
+      text-align: center;
+      padding-block: 3rem;
+
+      input {
+        border-radius: 50px;
+        padding-block: 0.5rem;
+        width: 15%;
+
+        border: 1px solid var(--color-neutrals-50);
+
+        &::placeholder {
+          color: var(--color-neutrals-700);
+        }
+      }
+
+      h4 {
+        color: var(--color-yellow-500);
+        font-family: var(--font-lato);
+        font-size: 16px;
+      }
+
+      h2 {
+        color: var(--color-neutrals-50);
+        font-size: 35px;
+      }
+
+      span {
+        color: var(--color-yellow-500);
+      }
+    }
+
+    p {
+      color: var(--color-neutrals-400);
+      font-family: var(--font-lato);
     }
 
     footer {
@@ -85,22 +311,8 @@ import { Font } from "astro:assets";
       display: flex;
       justify-content: space-evenly;
       align-items: center;
-    }
-    & p {
-      color: var(--color-neutrals-400);
-      font-family: var(--font-lato);
-    }
-    section {
-      background: var(--color-neutrals-900);
-    }
-    & h4,
-    h5 {
-      text-align: center;
-      color: var(--color-neutrals-400);
-      font-family: var(--font-lato);
-    }
-    h5 span {
-      color: var(--color-yellow-500);
+      padding-block: 1rem;
+      border-top: 1px solid var(--color-neutrals-700);
     }
   </style>
 </html>
