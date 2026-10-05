@@ -14,28 +14,30 @@
   <button>Join our team</button>
 </section>
 <style>
-  section {
-    max-inline-size: 1200px;
-    margin-inline: auto;
-    padding-block: 1rem;
-    display: flex;
-    flex-direction: column;
-    h1 {
-      font-size: var(--heading-1);
-    }
-    p {
-      max-inline-size: 68ch;
-    }
+  @layer section {
+    section {
+      max-inline-size: 1200px;
+      margin-inline: auto;
+      padding-block: 1rem;
+      display: flex;
+      flex-direction: column;
+      h1 {
+        font-size: var(--heading-1);
+      }
+      p {
+        max-inline-size: 68ch;
+      }
 
-    button {
-      border-radius: 50px;
-      max-inline-size: 68ch;
-      padding: 0.5rem;
-      background: var(--color-neutrals-900);
-      color: var(--color-neutrals-200);
-      padding-inline: 1rem;
-      align-self: flex-end;
-      font-family: var(--font-lato);
+      button {
+        border-radius: 50px;
+        max-inline-size: 68ch;
+        padding: 0.5rem;
+        background: var(--color-neutrals-900);
+        color: var(--color-neutrals-200);
+        padding-inline: 1rem;
+        align-self: flex-end;
+        font-family: var(--font-lato);
+      }
     }
   }
 </style>

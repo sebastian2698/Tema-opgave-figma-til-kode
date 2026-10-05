@@ -3,7 +3,7 @@ import { Image } from "astro:assets";
 import Services from "./Services.astro";
 import CEOImage from "@assets/images/ceo.webp";
 import MadsImage from "../data/images/mads.webp";
-import Checkmark from "@checkmark.svg"
+import Checkmark from "@icons/checkmark.svg";
 ---
 
 <section class="section-grid hero">
@@ -50,13 +50,19 @@ import Checkmark from "@checkmark.svg"
 
       <ul>
         <li>
-          Collaborate to build actionable strategies that drive sustainable
-          growth and deliver tangible outcomes.
+          <Checkmark aria-hidden="true" />
+          <span>
+            Collaborate to build actionable strategies that drive sustainable
+            growth and deliver tangible outcomes.
+          </span>
         </li>
 
         <li>
-          Identify opportunities to optimize processes and implement impactful
-          solutions with measurable results.
+          <Checkmark aria-hidden="true" />
+          <span>
+            Identify opportunities to optimize processes and implement impactful
+            solutions with measurable results.
+          </span>
         </li>
       </ul>
     </div>
@@ -103,7 +109,7 @@ import Checkmark from "@checkmark.svg"
     display: grid;
     grid-template-columns: subgrid;
   }
-
+  /********** grids *******/
   .hero > article > .hero-content {
     grid-column: content-start / middle;
     grid-row: 1;
@@ -111,6 +117,28 @@ import Checkmark from "@checkmark.svg"
     align-content: center;
     min-width: 0;
     padding: 4rem 2rem 7rem 0;
+  }
+
+  .hero > article > figure {
+    overflow: hidden;
+  }
+
+  .hero > article > figure > :global(img) {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+    object-position: 50% 50%;
+    transform: scale(1.25);
+    transform-origin: 50% 40%;
+  }
+
+  @media (max-width: 48rem) {
+    .hero > article > figure > :global(img) {
+      height: auto;
+      transform: none;
+    }
   }
 
   h1 {
@@ -187,6 +215,14 @@ import Checkmark from "@checkmark.svg"
     margin: 0;
   }
 
+  .hero > article > figure > :global(img) {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0;
+  }
+
   .expect > article > figure > :global(img) {
     display: block;
     width: 100%;
@@ -245,21 +281,42 @@ import Checkmark from "@checkmark.svg"
     border-radius: 1rem;
   }
 
-li:before {
-  content: '';
-  width: 1.6rem;
-  height: 1lh;
-  background: {Checkmark} 50% 50% / 100% auto no-repeat;
-}
+  .section-text > ul {
+    display: grid;
+    gap: 1rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
 
+  .section-text > ul > li {
+    display: grid;
+
+    grid-template-columns: 1.1rem minmax(0, 1fr);
+    column-gap: 0.75rem;
+    align-items: start;
+
+    color: var(--color-text-muted);
+    line-height: 1.5;
+  }
+
+  .section-text > ul > li > :global(svg) {
+    display: block;
+    width: 1.1rem;
+    height: 1.1rem;
+
+    margin-top: 0.2rem;
+    color: #27b737;
+  }
 
   .section-text {
     display: grid;
     gap: 1rem;
     min-width: 0;
- > * {
-    margin: 0;
-  }}
+    > * {
+      margin: 0;
+    }
+  }
 
   .section-text > p,
   .section-text li {
