@@ -1,15 +1,77 @@
 /* Globale styles her */
-
 html {
+  font-family: var(--font-lato);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+@view-transition {
+  navigation: auto;
+}
+
+button,
+input,
+select,
+textarea {
   font-family: var(--font-lato);
 }
 
 h1,
 h2,
+h3,
+h4,
+h5,
+h6,
+p,
+figure {
+  margin: 0;
+}
+
+:where(h1, h2, h3, h4) {
+  font-weight: 700;
+  line-height: 1.15;
+  overflow-wrap: break-word;
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: var(--font-size-h1);
+  font-family: var(--font-cabin);
+}
+h2 {
+  font-size: var(--font-size-h2);
+  font-family: var(--font-cabin);
+}
 h3 {
+  font-size: var(--font-size-h3);
+  font-family: var(--font-cabin);
+}
+h4 {
+  font-size: var(--font-size-body);
   font-family: var(--font-cabin);
 }
 
-@view-transition {
-  navigation: auto;
+p,
+li {
+  font-size: var(--font-size-body);
+  line-height: 1.6;
+  overflow-wrap: break-word;
+}
+
+.section-text > h4 {
+  font-size: var(--font-size-eyebrow);
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+img {
+  display: block;
+  max-inline-size: 100%;
+  block-size: auto;
 }

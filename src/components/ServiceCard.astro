@@ -7,7 +7,6 @@ import ArrowRight from "@icons/arrow--right.svg";
   <h2>{service.title}</h2>
   <p>{service.description}</p>
   <a href="#0">{service.buttonText} <ArrowRight stroke-width={2.5} /></a>
-  <!-- <a> burde måske være en variant af en component -->
 </article>
 
 <style>
@@ -15,51 +14,52 @@ import ArrowRight from "@icons/arrow--right.svg";
     article {
       display: flex;
       flex-direction: column;
+      width: 100%;
+      min-width: 0;
+      min-height: 175px;
+      padding: clamp(1.25rem, 3vw, 2rem);
       background: var(--color-blue-700-transparent);
       color: var(--color-on-surface-elevated);
-      padding: 2rem; /* Dette burde være en token */
-      border-radius: 20px; /* Dette burde være en token */
-      min-height: 175px;
-      padding: 2rem;
-      width: 300px;
-    }
-
-    * > article {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      border-radius: 20px;
     }
 
     h2 {
-      margin: 0 0 0.5rem;
-    }
-    p {
-      margin: 0 0 1.25rem;
-      line-height: 1.5;
+      font-size: clamp(1.25rem, 1rem + 0.5vw, 1.5rem);
+      line-height: 1.2;
     }
 
+    p {
+      font-size: clamp(0.9rem, 0.85rem + 0.2vw, 1rem);
+      line-height: 1.5;
+    }
     a {
       display: inline-flex;
       align-items: center;
       align-self: flex-start;
       margin-top: auto;
       gap: 1ch;
-      color: var(--color-action);
+      color: var(--color-yellow-500, yellow);
       font-weight: bold;
     }
-
-    article > a {
-      display: inline-flex;
-      margin-top: auto;
+    article div > a {
+      display: flex;
       align-items: center;
-      align-self: flex-start;
-      padding-top: 2rem;
-      gap: 20px;
-      color: var(--color-action);
-      font-weight: bold;
+      gap: 0.5rem;
 
-      svg {
-        inline-size: 16px;
-      }
+      color: var(--color-yellow-500);
+      font-weight: bold;
     }
+
+    svg {
+      inline-size: 16px;
+    }
+    article div > a svg {
+      color: currentColor;
+    }
+  }
+
+  div > p:nth-of-type(3) {
+    font-weight: bold;
+    color: var(--color-yellow-500);
   }
 </style>

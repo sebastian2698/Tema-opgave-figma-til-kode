@@ -47,16 +47,15 @@ const experience: Experience = await fetch(
       [middle] minmax(0, calc(var(--content-width, 75rem) * 2 / 3))
       [content-end] minmax(var(--page-padding, 1rem), 1fr)
       [full-end];
-
     align-items: center;
     row-gap: 2.5rem;
     padding-block: var(--section-space, 5rem);
-
     background-color: var(--color-yellow-500, #ffcc41);
     color: #080d18;
-
     view-timeline-name: --experience-scroll;
     view-timeline-axis: block;
+    container-name: experience;
+    container-type: inline-size;
   }
   /******************** section-text  */
   section > .section-text {
@@ -79,6 +78,7 @@ const experience: Experience = await fetch(
     letter-spacing: 0.12em;
     text-transform: uppercase;
     justify-self: left;
+    color: var(--color-neutrals-900);
   }
 
   .section-text > h2 {
@@ -103,17 +103,28 @@ const experience: Experience = await fetch(
     gap: clamp(1.5rem, 2.5vw, 2.5rem);
     justify-content: center;
   }
+
+  @container experience (max-width: 700px) {
+    section > .section-text {
+      grid-column: content-start / content-end;
+      padding-inline-end: 0;
+    }
+
+    section .donut_section {
+      grid-column: content-start / content-end;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
   .donut_section > figure {
     --value: attr(data-value type(<number>));
     --value-string: attr(data-value);
-
     container: circle / inline-size;
-
     display: grid;
     grid-template-rows: auto auto;
     place-items: center;
     row-gap: 1rem;
-
     width: min(100%, 11rem);
     min-width: 0;
     margin: 0;
@@ -150,7 +161,6 @@ const experience: Experience = await fetch(
     cx: 50px;
     cy: 50px;
     r: calc(50px - var(--stroke-width) / 2);
-
     fill: none;
     stroke-width: var(--stroke-width);
   }
@@ -178,9 +188,7 @@ const experience: Experience = await fetch(
   .progress {
     stroke: var(--color-neutrals-50);
     stroke-dasharray: 100;
-
     stroke-dashoffset: calc(100 - (var(--value) * var(--scroll-progress)));
-
     stroke-linecap: round;
   }
 
@@ -202,6 +210,18 @@ const experience: Experience = await fetch(
 
     to {
       --scroll-progress: 1;
+    }
+  }
+
+  @container (width < 500px) {
+    article {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto;
+    }
+
+    article > div {
+      grid-template-rows: auto;
+      grid-row: auto;
     }
   }
 </style>

@@ -1,0 +1,164 @@
+---
+const core = await fetch("https://ftk-api.pages.dev/core-values");
+const value = await core.json();
+import ArrowRight from "@icons/arrow--right.svg";
+import Bars from "@icons/bars.svg";
+import Globe from "@icons/globe.svg";
+import Layers from "@icons/layers.svg";
+import Gear from "@icons/gear.svg";
+const icons = [Layers, Bars, Globe, Gear];
+---
+
+<section class="section-grid">
+  <div class="pattern">
+    <p>{value.eyebrow}</p>
+    <h2>{value.title}</h2>
+    <p>{value.subtitle}</p>
+    <button>{value.button.text}</button>
+
+    <article>
+      {
+        value.values.map((corevalues: any, index: number) => {
+          const Icons = icons[index];
+          return (
+            <div>
+              <Icons width={32} height={30} />
+              <p>{corevalues.title}</p>
+              <p>{corevalues.description}</p>
+              <p>
+                {corevalues.link.text} <ArrowRight />
+              </p>
+            </div>
+          );
+        })
+      }
+    </article>
+  </div>
+</section>
+<style>
+  section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(to right, rgb(255 196 0 / 0.18) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(255 196 0 / 0.18) 1px, transparent 1px);
+    background-size: 80px 80px;
+    mask-image: radial-gradient(ellipse at 65% 45%, black 20%, transparent 75%);
+    pointer-events: none;
+  }
+
+  .pattern {
+    position: relative;
+    z-index: 1;
+  }
+
+  section {
+    position: relative;
+    overflow: hidden;
+    padding: min(7rem, 10%);
+    container-type: inline-size;
+    background: var(--color-neutrals-900);
+    container-type: inline-size;
+    p {
+      font-size: var(--paragraph-);
+      color: var(--color-surface-primary);
+      max-inline-size: 68ch;
+    }
+    h2 {
+      font-size: var(--heading-2);
+      color: var(--color-neutrals-100);
+    }
+    button {
+      border-radius: 50px;
+      padding: 0.5rem;
+      background: var(--color-neutrals-900);
+      color: var(--color-neutrals-200);
+      padding-inline: 1rem;
+      font-family: var(--font-lato);
+      display: flex;
+      place-self: end;
+      gap: 0.8rem;
+    }
+  }
+  article {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto auto 1fr auto;
+    row-gap: 3rem;
+    gap: 1rem;
+    padding: 1rlh;
+
+    div {
+      display: grid;
+      grid-template-rows: subgrid;
+      grid-row: 1 / -1;
+      box-sizing: border-box;
+      min-width: 0;
+      padding: min(10rem, 10%);
+      border: 1px solid var(--color-neutrals-200);
+      border-radius: 1rem;
+      background: #fff;
+    }
+    div:nth-child(2) {
+      margin-bottom: 1rlh;
+    }
+    div:nth-child(4) {
+      margin-bottom: 1rlh;
+    }
+    div > p:first-of-type {
+      font-weight: bold;
+    }
+    div > p:nth-of-type(2) {
+      color: var(--color-text-muted);
+    }
+    div > p:nth-of-type(3) {
+      font-weight: bold;
+      color: var(--color-neutrals-900);
+    }
+    svg {
+      color: #fff;
+      background: var(--color-ui-primary);
+      box-sizing: content-box;
+      width: 2lh;
+      height: 2lh;
+      border-radius: 50px;
+    }
+    div > p:last-of-type svg {
+      width: 1rem;
+      height: 1rem;
+      margin: 0;
+      padding: 0;
+      background: transparent;
+      color: var(--color-neutrals-900);
+    }
+    div > p:last-of-type {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+  }
+  @container (width < 500px) {
+    article {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto;
+    }
+
+    article > div {
+      grid-template-rows: auto;
+      grid-row: auto;
+    }
+  }
+
+  @media (max-width: 48rem) {
+    .section-grid > article {
+      grid-column: content-start / content-end;
+      padding: 3rem 0;
+    }
+
+    .section-grid > article {
+      grid-column: content-start / content-end;
+      grid-row: 2;
+    }
+  }
+</style>
